@@ -79,13 +79,14 @@
       color: #9499a0;
     }
     /* 经验贴简洁卡片（去 B 站视频卡风） */
-    .post-card { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:#fff; border:1px solid #f1f2f3; border-radius:10px; transition:all .2s; text-decoration:none; }
+    .post-card { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:#fff; border:1px solid #f1f2f3; border-radius:10px; transition:all .2s; text-decoration:none; min-width:0; }
     .post-card:hover { border-color:#e63946; box-shadow:0 4px 14px rgba(230,57,70,.1); transform:translateY(-2px); }
     .post-card-main { flex:1; min-width:0; }
     .post-card-title { font-size:.95rem; font-weight:600; color:#18191c; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .post-card-tags { display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; }
     .post-tag { font-size:.72rem; color:#e63946; background:#fdf0f0; padding:2px 8px; border-radius:999px; }
-    .post-card-school { font-size:.85rem; color:#9499a0; flex-shrink:0; max-width:170px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .post-card-school { font-size:.85rem; color:#9499a0; flex-shrink:0; max-width:170px; min-width:0; overflow:hidden; }
+    .post-card-school span { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   </style>
 
 <link rel="stylesheet" href="../mobile-function-shell.css?v=20260818">
@@ -102,7 +103,7 @@
   body.mobile-function-ready .page-content { padding-top: 0 !important; }
   .hero-banner { flex-direction: column; align-items: stretch; gap: 12px; text-align: center; }
   .compact-grid { grid-template-columns: 1fr; }
-  .card-grid { grid-template-columns: 1fr; }
+  .card-grid { grid-template-columns: minmax(0, 1fr); }
   .section-header { flex-wrap: wrap; gap: 8px; }
 }
 </style>

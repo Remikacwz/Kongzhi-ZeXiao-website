@@ -121,8 +121,7 @@
     '</aside>'
   );
   document.body.classList.add('mobile-function-ready');
-  var isSchoolDetail = path.indexOf('/school_detail/') !== -1;
-  if (isSchoolDetail) document.body.classList.add('mfs-no-dock');
+  // 学校详情页同样保留底部快捷导航栏（与其它子页面保持一致）
 
   var sheet = document.querySelector('.mfs-sheet');
   var scrim = document.querySelector('.mfs-scrim');

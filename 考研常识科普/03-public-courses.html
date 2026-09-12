@@ -40,14 +40,18 @@
       width: 80px; font-weight: 600; color: #e63946; text-align: right; flex-shrink: 0;
     }
     .module-track {
-      flex: 1; height: 28px; background: #e8f0fe; border-radius: 6px; overflow: hidden;
+      display: flex; align-items: center;
+      flex: 1; min-width: 0; height: 28px; background: #e8f0fe; border-radius: 6px; overflow: hidden;
     }
     .module-fill {
-      height: 100%; background: linear-gradient(90deg, #e63946, #f08a8e);
-      border-radius: 6px; display: flex; align-items: center; justify-content: flex-end;
-      padding-right: 10px; color: #fff; font-size: .8rem; font-weight: 600;
+      flex: 0 0 auto; height: 100%; background: linear-gradient(90deg, #e63946, #f08a8e);
+      border-radius: 6px;
     }
-    .module-pct { width: 50px; font-weight: 700; color: #e63946; }
+    .module-val {
+      margin-left: 8px; flex-shrink: 0; font-size: .8rem; font-weight: 600;
+      color: #e63946; white-space: nowrap;
+    }
+    .module-pct { display: none; }
     .stage-card {
       background: #fff; border-radius: 6px; padding: 20px; margin-bottom: 16px;
       box-shadow: 0 2px 8px rgba(0,0,0,.05); border-left: 3px solid #e63946;
@@ -165,44 +169,44 @@
           <div class="module-bar">
             <div class="module-name">马原</div>
             <div class="module-track">
-              <div class="module-fill" style="width:24%">24%</div>
+              <div class="module-fill" style="width:24%"></div>
+              <span class="module-val">24%</span>
             </div>
-            <div class="module-pct">约24%</div>
           </div>
           <div class="module-bar">
             <div class="module-name">新思想</div>
             <div class="module-track">
-              <div class="module-fill" style="width:22%">22%</div>
+              <div class="module-fill" style="width:22%"></div>
+              <span class="module-val">22%</span>
             </div>
-            <div class="module-pct">约22%</div>
           </div>
           <div class="module-bar">
             <div class="module-name">时政</div>
             <div class="module-track">
-              <div class="module-fill" style="width:16%">16%</div>
+              <div class="module-fill" style="width:16%"></div>
+              <span class="module-val">16%</span>
             </div>
-            <div class="module-pct">约16%</div>
           </div>
           <div class="module-bar">
             <div class="module-name">思修法基</div>
             <div class="module-track">
-              <div class="module-fill" style="width:15%">15%</div>
+              <div class="module-fill" style="width:15%"></div>
+              <span class="module-val">15%</span>
             </div>
-            <div class="module-pct">约15%</div>
           </div>
           <div class="module-bar">
             <div class="module-name">史纲</div>
             <div class="module-track">
-              <div class="module-fill" style="width:14%">14%</div>
+              <div class="module-fill" style="width:14%"></div>
+              <span class="module-val">14%</span>
             </div>
-            <div class="module-pct">约14%</div>
           </div>
           <div class="module-bar">
             <div class="module-name">毛中特</div>
             <div class="module-track">
-              <div class="module-fill" style="width:13%">13%</div>
+              <div class="module-fill" style="width:13%"></div>
+              <span class="module-val">13%</span>
             </div>
-            <div class="module-pct">约13%</div>
           </div>
           <div class="tip-box info" style="margin-top:14px;">
             <div class="tip-title">💡 复习优先级建议</div>

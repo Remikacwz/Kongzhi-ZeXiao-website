@@ -72,9 +72,26 @@
   var verdictText=document.createElement('p');verdictText.textContent='先看核心信息，再展开专业、复试和就业明细。';
   verdict.append(verdictLabel,verdictTitle,verdictText);header.appendChild(verdict);
   var tabs=document.createElement('nav');tabs.className='school-section-tabs';tabs.setAttribute('aria-label','院校详情分区');
-  [['院校概览','#'],['招生数据','.wrap'],['复试录取','.wrap h2:nth-of-type(4)'],['动态与交流','#schoolContentModules']].forEach(function(item){var a=document.createElement('a');a.href=item[1];a.textContent=item[0];tabs.appendChild(a);});
+  function wrapHeadings(){var out=[],i,ch=wrap.children;for(i=0;i<ch.length;i++){if(ch[i].tagName==='H2')out.push(ch[i]);}return out;}
+  function findHeading(primary,fallback){var hs=wrapHeadings(),i;for(i=0;i<hs.length;i++){if(hs[i].textContent.indexOf(primary)!==-1)return hs[i];}if(fallback){for(i=0;i<hs.length;i++){if(hs[i].textContent.indexOf(fallback)!==-1)return hs[i];}}return null;}
+  function smoothTo(el){if(!el)return;try{el.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){el.scrollIntoView();}}
+  [['院校概览',null],['招生数据',function(){return findHeading('招生',null);}],['复试录取',function(){return findHeading('录取','复试');}],['动态与交流',function(){return document.getElementById('schoolContentModules');}]].forEach(function(item){
+    var a=document.createElement('a');
+    a.href='#';
+    a.textContent=item[0];
+    if(item[0]==='动态与交流')a.setAttribute('data-tab','modules');
+    a.addEventListener('click',function(ev){
+      ev.preventDefault();
+      if(!item[1]){window.scrollTo({top:0,behavior:'smooth'});return;}
+      smoothTo(item[1]());
+    });
+    tabs.appendChild(a);
+  });
   header.insertAdjacentElement('afterend',tabs);
   var section=document.createElement('section');section.id='schoolContentModules';
   var footer=wrap.querySelector('footer');if(footer)wrap.insertBefore(section,footer);else wrap.appendChild(section);
-  render(section,schoolName,{embedded:false});
+  render(section,schoolName,{embedded:false}).then(function(items){
+    var t=tabs.querySelector('[data-tab="modules"]');
+    if(t&&(!items||!items.length))t.style.display='none';
+  });
 })();

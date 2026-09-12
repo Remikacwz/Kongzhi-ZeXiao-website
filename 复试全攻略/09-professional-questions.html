@@ -70,29 +70,44 @@
     '模拟电子技术', '数字逻辑电路', '微机原理', 'C语言', '电气控制与 PLC',
     '电力电子技术', '电机学', '数字信号处理', '模式识别', '英语面试'
   ];
+  var TARGET = 100;
   var selected = [];
-  var per = Math.ceil(100 / preferred.length);
+  var seenQ = {};
+  // 只收录「题目和答案都完整」的题，避免只有题目没有答案
+  function usable(item) {
+    if (!item) return false;
+    if (!String(item.q || '').trim() || !String(item.a || '').trim()) return false;
+    if ((item.q + item.a).indexOf('香农') >= 0) return false;
+    return !seenQ[String(item.q).trim()];
+  }
+  function take(subj, ch, item) {
+    seenQ[String(item.q).trim()] = 1;
+    selected.push({ subject: subj.name, chapter: ch.name, q: item.q, a: item.a });
+  }
+  // 第一轮：各科目均摊，保证覆盖面
+  var quota = Math.ceil(TARGET / preferred.length);
   preferred.forEach(function (name) {
     var subj = DATA.subjects.find(function (s) { return s.name === name; });
     if (!subj) return;
+    var got = 0;
     subj.chapters.forEach(function (ch) {
       ch.questions.forEach(function (item) {
-        if (selected.length >= 100) return;
-        if ((item.q + item.a).indexOf('香农') >= 0) return;
-        selected.push({ subject: subj.name, chapter: ch.name, q: item.q, a: item.a });
+        if (got >= quota || selected.length >= TARGET) return;
+        if (!usable(item)) return;
+        take(subj, ch, item);
+        got++;
       });
     });
   });
-  // 若不足 100 再补其他科目
-  if (selected.length < 100) {
+  // 第二轮：仍不足 100 则从其余科目补齐
+  if (selected.length < TARGET) {
     DATA.subjects.forEach(function (subj) {
-      if (selected.length >= 100) return;
       if (preferred.indexOf(subj.name) >= 0) return;
       subj.chapters.forEach(function (ch) {
         ch.questions.forEach(function (item) {
-          if (selected.length >= 100) return;
-          if ((item.q + item.a).indexOf('香农') >= 0) return;
-          selected.push({ subject: subj.name, chapter: ch.name, q: item.q, a: item.a });
+          if (selected.length >= TARGET) return;
+          if (!usable(item)) return;
+          take(subj, ch, item);
         });
       });
     });
@@ -143,11 +158,14 @@
 
   window.toggleQa = function (el) {
     var answer = el.nextElementSibling;
-    if (answer) {
-      var show = answer.style.display !== 'block';
-      answer.style.display = show ? 'block' : 'none';
-      var arrow = el.querySelector('.arrow');
-      if (arrow) arrow.textContent = show ? '▲' : '▼';
+    if (!answer || String(answer.className).indexOf('qa-answer') < 0) return;
+    var open = String(el.className).indexOf('active') < 0;
+    if (open) {
+      el.classList.add('active');
+      answer.classList.add('open');
+    } else {
+      el.classList.remove('active');
+      answer.classList.remove('open');
     }
   };
 

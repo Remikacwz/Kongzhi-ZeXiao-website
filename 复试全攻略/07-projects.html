@@ -281,11 +281,13 @@ window.CONTROL_PROJECTS = [
 
   window.toggleProjectQa = function (el) {
     var answer = el.nextElementSibling;
-    if (answer) {
-      var show = answer.style.display !== 'block';
-      answer.style.display = show ? 'block' : 'none';
-      var arrow = el.querySelector('.arrow');
-      if (arrow) arrow.textContent = show ? '▲' : '▼';
+    if (!answer || String(answer.className).indexOf('qa-answer') < 0) return;
+    if (String(el.className).indexOf('active') < 0) {
+      el.classList.add('active');
+      answer.classList.add('open');
+    } else {
+      el.classList.remove('active');
+      answer.classList.remove('open');
     }
   };
 
