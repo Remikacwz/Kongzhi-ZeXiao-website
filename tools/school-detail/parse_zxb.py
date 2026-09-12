@@ -110,7 +110,8 @@ def parse_analysis(t, end):
     # 标题被拆成"四、26考研XX学院" / "（081100）…录取情况分析"
     if '录取情况' not in sec['标题']:
         _t2 = next((lines[u].strip() for u in range(t + 1, min(t + 4, end)) if lines[u].strip()), '')
-        if '录取情况' in _t2:
+        # 仅当下一行是"续行"（不是另一个编号小节）时才拼接，避免把下一个小节标题粘进来
+        if '录取情况' in _t2 and not re.match(r'^(?:\d+|[一二三四五六七八九十]+)、', _t2):
             sec['标题'] = sec['标题'] + _t2
     for u in range(t + 1, min(t + 130, end)):
         ll = lines[u].strip()
@@ -147,14 +148,23 @@ def parse_analysis(t, end):
         if g:
             sec['复录比'] = num(g.group(1))
         # 列式转置表：标签行 + 值行（如沈阳工业大学）
-        if ll == '学科' and lines[u + 1].strip() == '一志愿拟录取人数':
-            v = u + 5
-            while v < end and not lines[v].strip():
+        if ll == '学科' and re.match(r'^一志愿(?:拟)?录取人数$', lines[u + 1].strip()):
+            # 转置表：标签列 + 值行；专业名可能被拆成多行，故向下找第一个纯数字行
+            v = u + 2
+            while v < end and not re.match(r'^\d+$', lines[v].strip()):
                 v += 1
-            row = [lines[v + k].strip() for k in range(5)]
-            if len(row) >= 5 and re.match(r'^\d+$', row[1]):
-                sec['录取'] = int(row[1])
-                sec['录取最高'] = num(row[2]); sec['录取最低'] = num(row[3]); sec['录取平均'] = num(row[4])
+            row = [lines[v + k].strip() if v + k < end else '' for k in range(4)]
+            if len(row) == 4 and re.match(r'^\d+$', row[0]):
+                sec['录取'] = int(row[0])
+                sec['录取最高'] = num(row[1]); sec['录取最低'] = num(row[2]); sec['录取平均'] = num(row[3])
+            for w in range(u, min(u + 40, end)):
+                if lines[w].strip() == '一志愿复试人数':
+                    vv = w + 1
+                    while vv < end and not re.match(r'^\d+$', lines[vv].strip()):
+                        vv += 1
+                    if vv < end:
+                        sec['进复试'] = int(lines[vv].strip())
+                    break
         if ll == '一志愿进复试人数' and lines[u + 1].strip() == '一志愿进复试最高分':
             v = u + 5
             while v < end and not lines[v].strip():
@@ -176,6 +186,36 @@ def parse_analysis(t, end):
             sec['录取最高'] = sec['录取最低'] = sec['录取平均'] = num(g.group(1))
         if g and sec['复试平均'] is None and sec['录取'] == 0:
             sec['复试最高'] = sec['复试最低'] = sec['复试平均'] = num(g.group(1))
+        # 散文式："一志愿选择01/02方向只有一人，该学生的初试成绩345，已被录取"
+        g = re.search(r'初试成绩\s*(\d{3})\s*[，,]?\s*已被(?:拟)?录取', ll)
+        if not g:
+            _tail = next((lines[x].strip() for x in range(u + 1, min(u + 3, end)) if lines[x].strip()), '')
+            if '已被' in _tail and '录取' in _tail:
+                g = re.search(r'初试成绩\s*(\d{3})', ll)
+        if g and sec['录取最高'] is None:
+            _v = num(g.group(1))
+            if _v and 100 <= _v <= 500:
+                sec['录取最高'] = sec['录取最低'] = sec['录取平均'] = _v
+                if sec['录取'] is None:
+                    sec['录取'] = 1
+        # 散文式："一志愿进复试1人，初试总分为：288分，已被拟录取，接收调剂。"
+        g = re.search(r'一志愿进复试(\d+)人[，,].*?初试总分(?:为)?[：:]?\s*(\d+)\s*分', ll)
+        if g:
+            if sec['进复试'] is None: sec['进复试'] = int(g.group(1))
+            if sec['录取'] is None: sec['录取'] = int(g.group(1))
+            if sec['录取最高'] is None:
+                sec['录取最高'] = sec['录取最低'] = sec['录取平均'] = num(g.group(2))
+        # 散文式："一志愿进复试分别为254分、254分，初试总分均分为302.9分，已被拟录取。"
+        g = re.search(r'进复试分别为([\d、，,\s]+?)分', ll)
+        if g:
+            _vs = [num(x) for x in re.split(r'[、，,\s]+', g.group(1)) if re.match(r'^\d', x)]
+            if _vs:
+                sec['进复试'] = len(_vs)
+                sec['复试最高'] = max(_vs); sec['复试最低'] = min(_vs)
+                sec['复试平均'] = round(sum(_vs) / len(_vs), 1)
+        g = re.search(r'初试总分均分为\s*([\d.]+)\s*分', ll)
+        if g and sec['录取平均'] is None:
+            sec['录取平均'] = num(g.group(1))
         # 紧凑格式：一志愿进入复试14人，实际共录取7人，…初试成绩最高分431，最低分330，平均分380，复录比1:2
         if re.search(r'实际共?录取\d+人', ll) and '已录取人员' not in ll:
             g = re.search(r'最高分[：:]?\s*([\d.]+)', ll)
@@ -622,22 +662,48 @@ def parse_school(name, start, end):
                 sch['历年招生'].append(row)
             else:
                 t += 1
-    # ---- 录取情况分析 ----
+    # ---- 录取情况分析（标题写法各异，统一按同一节处理）----
+    _AN_TAIL = ('录取情况分析', '录取数据分析', '录取结果分析', '复试情况分析',
+                '复试数据分析', '录取情况', '复试情况')
+
+    def _is_an_title(_s):
+        _m = re.match(r'^(?:\d+|[一二三四五六七八九十]+)、\s*(.*)$', _s)
+        if not _m:
+            return False
+        _b = re.sub(r'\s+', '', re.sub(r'^2\d?\s?考研?', '', _m.group(1)))
+        return _b.endswith(_AN_TAIL)
+
+    _hits = []
     for t in range(start, end):
         l = lines[t].strip()
-        m = re.match(r'^(?:\d+|[一二三四五六七八九十]+)、\s*26 ?考研?(.+?)(?:一志愿)?录取情况分析$', l)
-        if m:
-            sch['录取分析'].append(parse_analysis(t, end))
+        if _is_an_title(l):
+            _hits.append(t)
             continue
-        m2 = re.match(r'^(?:\d+|[一二三四五六七八九十]+)、\s*26 ?考研?(.+?)(?:一志愿)?录取情况$', l)
-        if m2:
-            sch['录取分析'].append(parse_analysis(t, end))
-            continue
-        m3 = re.match(r'^(?:\d+|[一二三四五六七八九十]+)、\s*2\d\s*考研?', l)
-        if m3:
+        if re.match(r'^(?:\d+|[一二三四五六七八九十]+)、\s*2\d\s*考研?', l):
             _nx = next((lines[u].strip() for u in range(t + 1, min(t + 4, end)) if lines[u].strip()), '')
-            if '录取情况' in _nx and re.search(r'录取情况(?:分析)?$', _nx):
-                sch['录取分析'].append(parse_analysis(t, end))
+            if re.search(r'(?:录取(?:情况|数据)|复试情况)(?:分析)?$', _nx):
+                _hits.append(t)
+    # 兜底：按内容锚点回溯标题（标题可能是学院名、或被换行拆开）
+    _ANCHOR = re.compile(r'^(?:进入复试人员初试成绩最高分|已录取人员初试成绩最高分)')
+    _LABEL = re.compile(r'^(进入复试人员初试成绩|已录取人员初试成绩|最高分|最低分|平均分|分析|分数段|'
+                        r'复试人数|录取人数|录取百分比|各科均分|来自拟录取名单|来自进复试名单|备注|'
+                        r'政治|英语|数学|专业课|总分均分)')
+    if not _hits:
+        # 只有"标题法一无所获"时才启用，避免把长块切碎
+        for u in range(start, end):
+            if not _ANCHOR.match(lines[u].strip()):
+                continue
+            j = u - 1
+            while j > start and _LABEL.match(lines[j].strip()):
+                j -= 1
+            if j > start and lines[j].strip() and not any(abs(j - h) <= 2 for h in _hits):
+                _hits.append(j)
+    for t in sorted(set(_hits)):
+        _a = parse_analysis(t, end)
+        # 丢弃"标题命中但正文无任何数据"的空壳块
+        if any([_a['复试最高'], _a['复试最低'], _a['复试平均'], _a['录取最高'], _a['录取最低'],
+                _a['录取平均'], _a['进复试'], _a['录取'], _a['分数段']]):
+            sch['录取分析'].append(_a)
     # ---- 学院回退：学科介绍里没有学院行时，用学校级学院第一项（Excel 亦如此）----
     def _clean(c):
         c = re.sub(r'^[（(]?\d{2,4}[）)]?\s*', '', (c or '').strip())

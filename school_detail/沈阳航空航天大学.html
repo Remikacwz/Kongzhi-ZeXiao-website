@@ -84,46 +84,16 @@ footer{text-align:center;color:#999;font-size:12px;padding:20px}
   <h2>四、26考研录取情况分析</h2>
   
 <div class="card">
-  <h3>三、26考研自动化学院录取情况</h3>
-  <p class="stat">进复试 <b></b> 人 · 实际录取 <b></b> 人 · 复录比 <b></b></p>
-  <p class="score">复试初试：最高  / 最低  / 平均 　|　录取初试：最高  / 最低  / 平均 </p>
-  
-  
-  <div style="height:220px;"><canvas id="chart-0"></canvas></div>
-</div>
-<script>
-try {
-  var ctx = document.getElementById('chart-0');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: [],
-      datasets: [
-        { label: '复试人数', data: [], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
-        { label: '录取人数', data: [], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
-      ]
-    },
-    options: { responsive: true, maintainAspectRatio: false,
-animation: { duration: 550, easing: 'easeOutQuart' },
-scales: {
-  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
-  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
-}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
-  });
-} catch(e) { console.error(e); }
-</script>
-
-<div class="card">
   <h3>1、26考研控制科学与工程（自动化）录取情况</h3>
   <p class="stat">进复试 <b></b> 人 · 实际录取 <b>10</b> 人 · 复录比 <b></b></p>
   <p class="score">复试初试：最高 335.0 / 最低 266.0 / 平均 302.3　|　录取初试：最高 335.0 / 最低 266.0 / 平均 302.3</p>
   
   <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>330-339</td><td>1</td><td>335</td><td></td></tr><tr><td>320-329</td><td>2</td><td>323.5</td><td></td></tr><tr><td>310-319</td><td>1</td><td>317</td><td></td></tr><tr><td>300-309</td><td>2</td><td>300</td><td></td></tr><tr><td>290-299</td><td>2</td><td>291.5</td><td></td></tr><tr><td>270-279</td><td>1</td><td>275</td><td></td></tr><tr><td>260-269</td><td>1</td><td>266</td><td></td></tr></tbody></table>
-  <div style="height:220px;"><canvas id="chart-1"></canvas></div>
+  <div style="height:220px;"><canvas id="chart-0"></canvas></div>
 </div>
 <script>
 try {
-  var ctx = document.getElementById('chart-1');
+  var ctx = document.getElementById('chart-0');
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -149,11 +119,11 @@ scales: {
   <p class="score">复试初试：最高 402.0 / 最低 289.0 / 平均 344.1　|　录取初试：最高 402.0 / 最低 289.0 / 平均 344.1</p>
   
   <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>400-409</td><td>1</td><td>402</td><td></td></tr><tr><td>390-399</td><td>2</td><td>397.5</td><td></td></tr><tr><td>380-389</td><td>4</td><td>384</td><td></td></tr><tr><td>370-379</td><td>6</td><td>373.2</td><td></td></tr><tr><td>360-369</td><td>8</td><td>366</td><td></td></tr><tr><td>350-359</td><td>6</td><td>353.2</td><td></td></tr><tr><td>340-349</td><td>13</td><td>344</td><td></td></tr><tr><td>330-339</td><td>9</td><td>336</td><td></td></tr><tr><td>320-329</td><td>6</td><td>323.2</td><td></td></tr><tr><td>310-319</td><td>8</td><td>314.8</td><td></td></tr><tr><td>300-309</td><td>6</td><td>303</td><td></td></tr><tr><td>280-289</td><td>1</td><td>289</td><td></td></tr></tbody></table>
-  <div style="height:220px;"><canvas id="chart-2"></canvas></div>
+  <div style="height:220px;"><canvas id="chart-1"></canvas></div>
 </div>
 <script>
 try {
-  var ctx = document.getElementById('chart-2');
+  var ctx = document.getElementById('chart-1');
   new Chart(ctx, {
     type: 'bar',
     data: {

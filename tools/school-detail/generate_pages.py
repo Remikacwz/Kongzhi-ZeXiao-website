@@ -192,8 +192,15 @@ def scoreline_table(sch):
     return '\n'.join(rows)
 
 
+# 「三、历年招生人数」暂不展示（HIDE_HISTORY=True）：
+#   docx 原表头未保留（被渲染成“专业N”）、各校口径不一（学硕/专硕名额 vs 专业名）、
+#   部分学校数值含中文说明被丢弃、且一校多学院小节只取到第一个。
+#   口径核实后把 HIDE_HISTORY 改回 False 即可恢复。
+HIDE_HISTORY = True
+
+
 def history_table(sch):
-    if not sch['历年招生']:
+    if HIDE_HISTORY or not sch['历年招生']:
         return '<p>暂无历年招生数据</p>'
     rows = []
     for row in sch['历年招生']:

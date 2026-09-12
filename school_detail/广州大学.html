@@ -81,6 +81,35 @@ footer{text-align:center;color:#999;font-size:12px;padding:20px}
   <div class="card"><p>暂无历年招生数据</p></div>
   <h2>四、26考研录取情况分析</h2>
   
+<div class="card">
+  <h3>四、26考研085406 控制工程专硕录取数据分析</h3>
+  <p class="stat">进复试 <b>41</b> 人 · 实际录取 <b>25</b> 人 · 复录比 <b>1.64</b></p>
+  <p class="score">复试初试：最高 418.0 / 最低 344.0 / 平均 370.1　|　录取初试：最高 418.0 / 最低 348.0 / 平均 377.7　|　专业课均分 123.6 · 数学均分 104.5</p>
+  <p class="subavg">各科均分：政治 69.4 · 英语 72.6 · 数学 104.5 · 专业课 123.6</p>
+  <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>410-419</td><td>2</td><td>2</td><td>100.0%</td><td>79.5</td><td>79.0</td><td>119.5</td><td>137.0</td><td>415.0</td><td></td></tr><tr><td>400-409</td><td>2</td><td>2</td><td>100.0%</td><td>72.5</td><td>81.0</td><td>110.5</td><td>141.0</td><td>405.0</td><td></td></tr><tr><td>390-399</td><td>3</td><td>3</td><td>100.0%</td><td>72.0</td><td>73.7</td><td>118.7</td><td>130.0</td><td>394.3</td><td></td></tr><tr><td>380-389</td><td>6</td><td>6</td><td>100.0%</td><td>69.2</td><td>73.7</td><td>112.2</td><td>129.0</td><td>384.0</td><td></td></tr><tr><td>370-379</td><td>5</td><td>2</td><td>40.0%</td><td>67.5</td><td>73.5</td><td>111.5</td><td>124.5</td><td>377.0</td><td></td></tr><tr><td>360-369</td><td>4</td><td>2</td><td>50.0%</td><td>67.5</td><td>63.5</td><td>117.0</td><td>117.5</td><td>365.5</td><td></td></tr><tr><td>350-359</td><td>15</td><td>7</td><td>46.7%</td><td>68.9</td><td>76.0</td><td>86.4</td><td>123.4</td><td>354.7</td><td></td></tr><tr><td>340-349</td><td>4</td><td>1</td><td>25.0%</td><td>56.0</td><td>52.0</td><td>127.0</td><td>113.0</td><td>348.0</td><td></td></tr></tbody></table>
+  <div style="height:220px;"><canvas id="chart-0"></canvas></div>
+</div>
+<script>
+try {
+  var ctx = document.getElementById('chart-0');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["410-419", "400-409", "390-399", "380-389", "370-379", "360-369", "350-359", "340-349"],
+      datasets: [
+        { label: '复试人数', data: ["2", "2", "3", "6", "5", "4", "15", "4"], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
+        { label: '录取人数', data: ["2", "2", "3", "6", "2", "2", "7", "1"], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+animation: { duration: 550, easing: 'easeOutQuart' },
+scales: {
+  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
+  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
+}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
+  });
+} catch(e) { console.error(e); }
+</script>
   <footer>数据来源：《27考研择校宝典_版8》（控制类）· 仅供参考，最终以院校官方为准</footer>
 </div>
 

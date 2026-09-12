@@ -115,46 +115,16 @@ scales: {
 </script>
 
 <div class="card">
-  <h3>五、26考研低空技术与工程学硕一志愿上线的6个人全部录取六、26考研控制工程专硕录取情况分析</h3>
-  <p class="stat">进复试 <b></b> 人 · 实际录取 <b></b> 人 · 复录比 <b></b></p>
-  <p class="score">复试初试：最高  / 最低  / 平均 　|　录取初试：最高  / 最低  / 平均 </p>
-  
-  
-  <div style="height:220px;"><canvas id="chart-1"></canvas></div>
-</div>
-<script>
-try {
-  var ctx = document.getElementById('chart-1');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: [],
-      datasets: [
-        { label: '复试人数', data: [], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
-        { label: '录取人数', data: [], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
-      ]
-    },
-    options: { responsive: true, maintainAspectRatio: false,
-animation: { duration: 550, easing: 'easeOutQuart' },
-scales: {
-  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
-  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
-}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
-  });
-} catch(e) { console.error(e); }
-</script>
-
-<div class="card">
   <h3>六、26考研控制工程专硕录取情况分析</h3>
   <p class="stat">进复试 <b>149</b> 人 · 实际录取 <b>111</b> 人 · 复录比 <b></b></p>
   <p class="score">复试初试：最高 430.0 / 最低 234.0 / 平均 390.0　|　录取初试：最高 430.0 / 最低 234.0 / 平均 390.0　|　专业课均分 119.8 · 数学均分 123.2</p>
   <p class="subavg">各科均分：政治 70.2 · 英语 77.9 · 数学 123.2 · 专业课 119.8</p>
   <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>430-439</td><td>1</td><td>1</td><td>100.0%</td><td>78.0</td><td>90.0</td><td>140.0</td><td>122.0</td><td>430.0</td><td></td></tr><tr><td>420-429</td><td>5</td><td>4</td><td>80.0%</td><td>75.8</td><td>80.2</td><td>144.5</td><td>124.0</td><td>424.5</td><td></td></tr><tr><td>410-419</td><td>13</td><td>9</td><td>69.2%</td><td>71.4</td><td>79.8</td><td>133.3</td><td>129.3</td><td>413.9</td><td></td></tr><tr><td>400-409</td><td>29</td><td>21</td><td>72.4%</td><td>70.2</td><td>81.1</td><td>129.0</td><td>123.8</td><td>404.1</td><td></td></tr><tr><td>390-399</td><td>32</td><td>22</td><td>68.8%</td><td>70.6</td><td>76.4</td><td>125.0</td><td>122.8</td><td>394.8</td><td></td></tr><tr><td>380-389</td><td>26</td><td>20</td><td>76.9%</td><td>68.8</td><td>78.9</td><td>121.2</td><td>116.3</td><td>385.3</td><td></td></tr><tr><td>370-379</td><td>35</td><td>29</td><td>82.9%</td><td>69.5</td><td>76.4</td><td>115.2</td><td>114.4</td><td>375.6</td><td></td></tr><tr><td>360-369</td><td>3</td><td>3</td><td>100.0%</td><td>68.0</td><td>70.0</td><td>108.7</td><td>122.3</td><td>36</td><td></td></tr><tr><td>330-339</td><td>2</td><td>0</td><td>0.0%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>310-319</td><td>1</td><td>1</td><td>100.0%</td><td>72.0</td><td>78.0</td><td>78.0</td><td>87.0</td><td>315.0</td><td></td></tr><tr><td>280-289</td><td>1</td><td>0</td><td>0.0%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>230-239</td><td>1</td><td>1</td><td>100.0%</td><td>70.0</td><td>37.0</td><td>63.0</td><td>64.0</td><td>234.0</td></tr></tbody></table>
-  <div style="height:220px;"><canvas id="chart-2"></canvas></div>
+  <div style="height:220px;"><canvas id="chart-1"></canvas></div>
 </div>
 <script>
 try {
-  var ctx = document.getElementById('chart-2');
+  var ctx = document.getElementById('chart-1');
   new Chart(ctx, {
     type: 'bar',
     data: {
