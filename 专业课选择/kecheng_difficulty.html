@@ -78,6 +78,24 @@
             #cardList { display: grid !important; }
             .diff-toolbar .search-box { min-width: 100%; }
             .diff-toolbar select { flex: 1; min-width: 140px; }
+            /* —— 移动端布局修正 —— */
+            html { zoom: 1 !important; }                    /* 去掉 0.9 硬缩放，改用真实断点 */
+            .kd-hero { padding-top: 26px !important; padding-bottom: 40px !important; }
+            .hero-inner, .page-wrap { width: 100% !important; }
+            .hero-inner { padding: 0 2px; }
+            .hero-head { gap: 8px !important; margin-bottom: 10px !important; }
+            .hero-head i { font-size: 20px !important; }
+            .hero-badge { font-size: 11px !important; padding: 3px 8px !important; }
+            .hero-title { font-size: 23px !important; line-height: 1.32 !important; margin-bottom: 8px !important; }
+            .hero-desc { font-size: 13px !important; line-height: 1.68 !important; opacity: .95 !important; }
+            /* 三块统计：允许换行并等分，避免被 overflow-hidden 裁掉 */
+            .hero-stats { flex-wrap: wrap !important; gap: 8px !important; margin-top: 16px !important; }
+            .hero-stats > div { flex: 1 1 calc(33.33% - 6px); min-width: 88px; padding: 7px 9px !important; }
+            .hero-stats > div > .text-2xl { font-size: 17px !important; }
+            .hero-stats > div > span:last-child { font-size: 11px !important; }
+            .diff-toolbar { gap: 6px !important; }
+            .diff-toolbar .filter-chip { flex: 1 1 calc(50% - 6px); text-align: center; }
+            .diff-card { padding: 13px !important; }
         }
     </style>
 <style>html{zoom:0.85;}@media(max-width:768px){html{zoom:0.9;}}</style>
@@ -90,19 +108,19 @@
 <div class="back-nav"><a class="back back-up" href="index.html">← 返回上一级</a></div>
     <div class="min-h-screen pb-12">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white py-12 px-4 relative overflow-hidden">
+        <div class="kd-hero bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white py-12 px-4 relative overflow-hidden">
             <div class="absolute inset-0 opacity-10">
                 <div class="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
                 <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/3 translate-y-1/3"></div>
             </div>
-            <div class="w-[85%] mx-auto relative">
-                <div class="flex items-center gap-3 mb-4">
+            <div class="w-[85%] mx-auto relative hero-inner">
+                <div class="flex items-center gap-3 mb-4 hero-head">
                     <i class="fas fa-chart-line text-3xl"></i>
-                    <span class="text-sm font-medium bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">@控制阿祖（控制考研与择校）</span>
+                    <span class="text-sm font-medium bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm hero-badge">@控制阿祖（控制考研与择校）</span>
                 </div>
-                <h1 class="text-4xl font-bold mb-3">控制类考研专业课难度榜单</h1>
-                <p class="text-lg opacity-90 max-w-2xl">覆盖985/211高校自动控制原理、自动控制理论等控制类专业课，数据整理自《上岸难度表》，按难度梯度分级，助你精准择校备考。</p>
-                <div class="flex gap-8 mt-8 text-sm">
+                <h1 class="text-4xl font-bold mb-3 hero-title">控制类考研专业课难度榜单</h1>
+                <p class="text-lg opacity-90 max-w-2xl hero-desc">覆盖985/211高校自动控制原理、自动控制理论等控制类专业课，数据整理自《上岸难度表》，按难度梯度分级，助你精准择校备考。</p>
+                <div class="flex gap-8 mt-8 text-sm hero-stats">
                     <div class="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2">
                         <span class="text-2xl font-bold" id="stat-categories">2</span>
                         <span class="opacity-80 ml-1">大榜单</span>
@@ -120,7 +138,7 @@
             </div>
         </div>
 
-        <div class="w-[85%] mx-auto px-4 -mt-6 relative z-10">
+        <div class="w-[85%] mx-auto px-4 -mt-6 relative z-10 page-wrap">
                         <!-- Category Tabs -->
             <div class="glass-card rounded-2xl shadow-lg p-3 mb-6 flex flex-wrap gap-2">
                 <button onclick="switchTab('all')" id="tab-all" class="tab-active px-4 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center gap-1.5">
