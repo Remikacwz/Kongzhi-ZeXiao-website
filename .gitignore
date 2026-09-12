@@ -48,3 +48,6 @@ uploads/content/*
 # 本地会话/OCR 临时目录
 .dsh-filess/
 .tmp_pdf_ocr/
+后台账号密码表.xlsx
+.qrcheck/
+后台账号密码.csv
