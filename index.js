@@ -277,7 +277,7 @@ function initFilters(){
 
   // B站粉丝数（已移到header中显示）
   // document.getElementById('bilibiliFans').textContent = 'B站 27.0万';
-  loadHomepageMedia().then(initPosterCarousel, initPosterCarousel);
+
   initHeatRank();
   loadPublishedHeatRank();
 }
@@ -1456,15 +1456,6 @@ function openImageLightbox(src) {
   var img = document.getElementById('imgLightboxImg');
   if (el && img) { img.src = src; el.style.display = 'flex'; }
 }
-function joinQQGroup(groupId) {
-  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  if (isMobile) {
-    window.location.href = 'mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=' + groupId;
-  } else {
-    var imgPath = groupId === '1050160942' ? '专业课选择/images/27考研群/27.jpg' : '专业课选择/images/27考研群/28.jpg';
-    openImageLightbox(imgPath);
-  }
-}
 function closeImageLightbox() {
   var el = document.getElementById('imgLightbox');
   if (el) el.style.display = 'none';
@@ -1554,24 +1545,10 @@ function goHome(){
     hp.style.removeProperty('display');
     window.scrollTo(0,0);
     Object.values(charts).forEach(c=>c&&c.resize());
-    updateHomeQqGroupAds(isQrAdEnabled());
   }, 200);
 }
 
 
-function openQrLightbox(src){
-  var ov = document.getElementById('qrLightbox');
-  if(!ov){
-    ov = document.createElement('div');
-    ov.id = 'qrLightbox';
-    ov.className = 'qr-lightbox-overlay';
-    ov.innerHTML = '<img id="qrLightboxImg" src="" style="max-width:90vw;max-height:85vh;width:auto;height:auto;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);border:4px solid #fff;">';
-    ov.onclick = function(){this.classList.remove('active');};
-    document.body.appendChild(ov);
-  }
-  document.getElementById('qrLightboxImg').src = src;
-  ov.classList.add('active');
-}
 function openPosterLightbox(src){
   // 如果旧灯箱存在，先移除（确保事件处理器是最新的）
   var oldOv = document.getElementById('posterLightbox');
@@ -1743,7 +1720,6 @@ function renderDetail(schoolName){
           <div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
             ${(EMPLOYMENT_SCHOOLS.has(schoolName) ? `<a href="${withSchoolDetailSource(EMPLOYMENT_MAP[schoolName] || '就业相关/院校就业去向/schools/' + schoolName + '.html', schoolName)}" class="tag clickable-tag" style="background:#fff3e0;color:#ef6c00;border:1px solid #ffcc80;font-size:14px;padding:6px 14px;border-radius:16px;text-decoration:none;" title="查看${schoolName}就业去向">💼 就业去向</a>` : '')}
             <a href="专业课选择/考研专业课院校查询.html?school=${encodeURIComponent(schoolName)}&fromSchoolDetail=1" class="tag clickable-tag" style="background:#dcfce7;color:#15803d;border:1px solid #86efac;font-size:14px;padding:6px 14px;border-radius:16px;text-decoration:none;" title="查看${schoolName}考察专业课">📚 考察专业课</a>
-            ${VALID_QRS.has(schoolName) ? `<span class="tag clickable-tag" style="background:#e0f2fe;color:#0277bd;border:1px solid #81d4fa;font-size:14px;padding:6px 14px;border-radius:16px;cursor:pointer;" onclick="openQrLightbox('${getQrPath(schoolName)}')" title="点击查看${schoolName}QQ群二维码">📱 院校QQ群</span>` : ''}
             ${GAIKAO_SCHOOLS.has(schoolName) ? `<a href="${withSchoolDetailSource('改考院校.html?school='+encodeURIComponent(schoolName), schoolName)}" class="tag clickable-tag" style="background:#fff1f0;color:#cf1322;border:1px solid #ffa39e;font-size:14px;padding:6px 14px;border-radius:16px;text-decoration:none;" title="查看${schoolName}改考信息">🔔 27考研有改考</a>` : ''}
             <span class="fav-star ${isFavorite(schoolName)?'fav-active':'fav-inactive'}" 
                   onclick="handleFavClick('${schoolName.replace(/'/g, "\\'")}')" 
@@ -1850,7 +1826,6 @@ function renderDetail(schoolName){
         <div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
           ${(EMPLOYMENT_SCHOOLS.has(schoolName) ? `<a href="${withSchoolDetailSource(EMPLOYMENT_MAP[schoolName] || '就业相关/院校就业去向/schools/' + schoolName + '.html', schoolName)}" class="tag clickable-tag" style="background:#fff3e0;color:#ef6c00;border:1px solid #ffcc80;font-size:14px;padding:6px 14px;border-radius:16px;text-decoration:none;" title="查看${schoolName}就业去向">💼 就业去向</a>` : '')}
           <a href="专业课选择/考研专业课院校查询.html?school=${encodeURIComponent(schoolName)}&fromSchoolDetail=1" class="tag clickable-tag" style="background:#dcfce7;color:#15803d;border:1px solid #86efac;font-size:14px;padding:6px 14px;border-radius:16px;text-decoration:none;" title="查看${schoolName}考察专业课">📚 考察专业课</a>
-          ${VALID_QRS.has(schoolName) ? `<span class="tag clickable-tag" style="background:#e0f2fe;color:#0277bd;border:1px solid #81d4fa;font-size:14px;padding:6px 14px;border-radius:16px;cursor:pointer;" onclick="openQrLightbox('${getQrPath(schoolName)}')" title="点击查看${schoolName}QQ群二维码">📱 院校QQ群</span>` : ``}
           ${GAIKAO_SCHOOLS.has(schoolName) ? `<a href="${withSchoolDetailSource('改考院校.html?school='+encodeURIComponent(schoolName), schoolName)}" class="tag clickable-tag" style="background:#fff1f0;color:#cf1322;border:1px solid #ffa39e;font-size:14px;padding:6px 14px;border-radius:16px;text-decoration:none;" title="查看${schoolName}改考信息">🔔 27考研有改考</a>` : ``}
           <span class="fav-star ${isFavorite(schoolName)?'fav-active':'fav-inactive'}" 
                 onclick="handleFavClick('${schoolName.replace(/'/g, "\\'")}')" 
@@ -1898,9 +1873,8 @@ function renderDetail(schoolName){
   // 广告框移到 detailAds 容器
   // 只在文件存在时才生成对应的HTML，彻底避免404请求
   var hasPoster = VALID_POSTERS.has(schoolName);
-  var hasQR = VALID_QRS.has(schoolName);
   
-  if(hasPoster || hasQR){
+  if(hasPoster){
     var adHtml = '';
     if(hasPoster){
       adHtml += `
@@ -1923,26 +1897,6 @@ function renderDetail(schoolName){
     if(detailAds) detailAds.style.display = 'none';
   }
   
-  // 院校QQ群二维码单独组件
-  var qqGroupCard = document.getElementById('qqGroupCard');
-  if(qqGroupCard) qqGroupCard.style.display = isQrAdEnabled() ? 'block' : 'none';
-  if(hasQR){
-    document.getElementById('qqGroupContent').innerHTML = `
-      <div style="text-align:center;cursor:pointer;" onclick="openQrLightbox('${getQrPath(schoolName)}')">
-        <img src="${getQrPath(schoolName)}"
-             style="width:100%;max-width:260px;aspect-ratio:944 / 1164;object-fit:contain;background:#fff;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.15);display:block;margin:0 auto;"
-             alt="${schoolName}QQ群">
-        <div style="font-size:12px;color:#555;font-weight:600;margin-top:4px;">📱 院校QQ群</div>
-        <div style="font-size:10px;color:#999;">扫码加入考研群</div>
-      </div>`;
-  } else {
-    document.getElementById('qqGroupContent').innerHTML = `
-      <div style="text-align:center;padding:28px 12px;color:#888;">
-        <div style="font-size:40px;line-height:1;margin-bottom:8px;">🏗️</div>
-        <div style="font-size:15px;font-weight:600;color:#555;">QQ群在建设中</div>
-        <div style="font-size:11px;color:#aaa;margin-top:4px;">该院校QQ群二维码暂未收集到</div>
-      </div>`;
-  }
 
   // 初始化筛选器
   initDetailFilters(schoolRecs);
@@ -2612,7 +2566,6 @@ function histOption(dist, color){
 window.addEventListener('DOMContentLoaded', ()=>{
   initStats();
   initFilters();
-  updateHomeQqGroupAds(isQrAdEnabled());
   renderRecentViewBar();
   
   // 恢复保存的筛选状态
@@ -3067,191 +3020,8 @@ function isQrAdEnabled(){
   var val = localStorage.getItem(QR_AD_KEY);
   return val === null ? true : (val === 'true');
 }
-function updateHomeQqGroupAds(enabled){
-  var isMobile = window.innerWidth <= 768;
-  var desktop = document.querySelectorAll('.ad-qq-group-desktop');
-  var mobile = document.querySelectorAll('.ad-qq-group-mobile');
-  desktop.forEach(function(el){ el.style.display = (enabled && !isMobile) ? 'flex' : 'none'; });
-  mobile.forEach(function(el){ el.style.display = (enabled && isMobile) ? 'flex' : 'none'; });
-}
-window.addEventListener('resize', function(){ updateHomeQqGroupAds(isQrAdEnabled()); updateResponsiveChromeVars(); });
-window.addEventListener('pageshow', function(){ updateHomeQqGroupAds(isQrAdEnabled()); updateResponsiveChromeVars(); });
 
-// ===================== 院校海报轮播 =====================
-var POSTERS = [
-  {school: '哈工大801控制考研全程班', img: '专业课选择/images/院校海报/compressed/哈工大801控制考研全程班.jpg', link: ''},
-  {school: '万人教育答疑班开班', img: '专业课选择/images/院校海报/compressed/万人教育答疑班.jpg', link: ''}
-];
-
-function loadHomepageMedia(){
-  return fetch('/api/site-media', {credentials:'same-origin', cache:'no-store'})
-    .then(function(response){
-      if(!response.ok) throw new Error('媒体配置读取失败');
-      return response.json();
-    })
-    .then(function(payload){
-      if(!payload || payload.code !== 0 || !payload.data) throw new Error('媒体配置格式错误');
-      var items = Array.isArray(payload.data.items) ? payload.data.items : [];
-      var byKey = {};
-      items.forEach(function(item){ byKey[item.slot_key] = item; });
-      ['home_qr_27','home_qr_28'].forEach(function(key){
-        var item = byKey[key];
-        document.querySelectorAll('[data-media-slot="' + key + '"]').forEach(function(card){
-          if(!item){ card.style.display = 'none'; return; }
-          card.style.removeProperty('display');
-          var title = card.querySelector('[data-media-title]');
-          var image = card.querySelector('[data-media-image]');
-          if(title) title.textContent = '🎓 ' + (item.title || '考研交流群');
-          if(!image) return;
-          image.src = item.image_url;
-          image.alt = item.title || '考研交流群';
-          image.onclick = item.link_url ? function(){ window.open(item.link_url, '_blank', 'noopener'); } : function(){ openImageLightbox(item.image_url); };
-        });
-      });
-      var configuredPosters = items.filter(function(item){ return item.kind === 'poster' && item.image_url; })
-        .map(function(item){ return {school:item.title || '院校海报', img:item.image_url, link:item.link_url || ''}; });
-      if(configuredPosters.length) POSTERS = configuredPosters;
-      else if(items.some(function(item){ return String(item.slot_key || '').indexOf('home_poster_') === 0; })) POSTERS = [];
-    });
-}
 // 实际存在的图片文件集合——用于彻底避免404请求
 var VALID_POSTERS = new Set(["哈工大801控制考研全程班", "万人教育答疑班开班"]);
 // 27考研改考院校集合（数据来源：改考院校.html）
 var GAIKAO_SCHOOLS = new Set(["河南大学", "长安大学", "吉林大学", "重庆大学", "华北电力大学(保定)", "江苏科技大学", "哈尔滨工业大学", "北京航空航天大学"]);
-// 仅登记已人工确认的控制类院校群；素材目录还混有电子、通信等专业群，禁止按同名文件自动全量导入。
-var VALID_QRS = new Set(["上海交通大学", "上海大学", "东北大学", "东北林业大学", "东南大学", "中南大学", "中国石油大学（华东）", "中国矿业大学（徐州）", "中国科学技术大学", "中国科学院大学", "北京交通大学", "北京化工大学", "北京工业大学", "北京理工大学", "北京航空航天大学", "北京邮电大学", "华东理工大学", "华中科技大学", "华北电力大学（保定）", "华北电力大学（北京）", "南京信息工程大学", "南京理工大学", "南京航空航天大学", "南京邮电大学", "南开大学", "南昌大学", "厦门大学", "合肥工业大学", "同济大学", "哈尔滨工业大学", "哈尔滨工程大学", "国防科技大学", "大连海事大学", "大连理工大学", "天津工业大学", "安徽大学", "山东大学", "广东工业大学", "新疆大学", "杭州电子科技大学", "武汉理工大学", "江南大学", "河北工业大学", "河海大学", "济南大学", "浙江理工大学", "燕山大学", "电子科技大学", "福州大学", "西北工业大学", "西安交通大学", "西安电子科技大学", "郑州大学", "重庆大学", "重庆邮电大学", "长安大学"]);
-var QR_EXTS = {
-  "上海交通大学": ".png",
-  "上海大学": ".png",
-  "东北大学": ".png",
-  "东北林业大学": ".png",
-  "东南大学": ".png",
-  "中南大学": ".png",
-  "中国石油大学（华东）": ".png",
-  "中国矿业大学（徐州）": ".png",
-  "中国科学技术大学": ".png",
-  "中国科学院大学": ".png",
-  "北京交通大学": ".png",
-  "北京化工大学": ".png",
-  "北京工业大学": ".png",
-  "北京理工大学": ".png",
-  "北京航空航天大学": ".png",
-  "北京邮电大学": ".png",
-  "华东理工大学": ".png",
-  "华中科技大学": ".png",
-  "华北电力大学（保定）": ".png",
-  "华北电力大学（北京）": ".png",
-  "南京信息工程大学": ".png",
-  "南京理工大学": ".png",
-  "南京航空航天大学": ".png",
-  "南京邮电大学": ".png",
-  "南开大学": ".png",
-  "南昌大学": ".png",
-  "厦门大学": ".png",
-  "合肥工业大学": ".png",
-  "同济大学": ".png",
-  "哈尔滨工业大学": ".png",
-  "哈尔滨工程大学": ".png",
-  "国防科技大学": ".png",
-  "大连海事大学": ".png",
-  "大连理工大学": ".png",
-  "天津工业大学": ".png",
-  "安徽大学": ".png",
-  "山东大学": ".png",
-  "广东工业大学": ".png",
-  "新疆大学": ".png",
-  "杭州电子科技大学": ".png",
-  "武汉理工大学": ".png",
-  "江南大学": ".png",
-  "河北工业大学": ".png",
-  "河海大学": ".png",
-  "济南大学": ".png",
-  "浙江理工大学": ".png",
-  "燕山大学": ".png",
-  "电子科技大学": ".png",
-  "福州大学": ".png",
-  "西北工业大学": ".png",
-  "西安交通大学": ".png",
-  "西安电子科技大学": ".png",
-  "郑州大学": ".png",
-  "重庆大学": ".png",
-  "重庆邮电大学": ".png",
-  "长安大学": ".png"
-};
-function getQrPath(name){
-  if(!VALID_QRS.has(name)) return null;
-  return '专业课选择/images/27考研群/' + name + (QR_EXTS[name] || '.png');
-}
-var posterIndex = 0;
-var posterTimer = null;
-
-function initPosterCarousel(){
-  var carousel = document.getElementById('posterCarousel');
-  if(!carousel || POSTERS.length === 0) return;
-  
-  // 后台发布的图片已经通过上传校验；仅过滤空地址，不额外发探测请求。
-  var filtered = POSTERS.filter(function(p){ return !!p.img; });
-  if(filtered.length === 0){
-    carousel.style.display = 'none';
-    return;
-  }
-  POSTERS = filtered;
-  
-  // 根据广告开关控制显示
-  var enabled = isQrAdEnabled();
-  carousel.style.display = enabled ? 'block' : 'none';
-  
-  var img = document.getElementById('posterImg');
-  var link = document.getElementById('posterLink');
-  var title = document.getElementById('posterTitle');
-  var dots = document.getElementById('posterDots');
-  if(!img || !link || !title || !dots) return;
-  
-  // 生成指示点
-  dots.innerHTML = '';
-  POSTERS.forEach(function(p, i){
-    var dot = document.createElement('span');
-    dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:' + (i === 0 ? '#a92122' : '#ddd') + ';cursor:pointer;transition:background .3s;';
-    dot.onclick = function(){ showPoster(i); };
-    dots.appendChild(dot);
-  });
-  
-  showPoster(0);
-  
-  // 每5秒切换
-  if(posterTimer) clearInterval(posterTimer);
-  posterTimer = setInterval(function(){
-    var enabled = isQrAdEnabled();
-    var carousel = document.getElementById('posterCarousel');
-    if(carousel && enabled){
-      posterIndex = (posterIndex + 1) % POSTERS.length;
-      showPoster(posterIndex);
-    }
-  }, 5000);
-}
-
-function showPoster(index){
-  var img = document.getElementById('posterImg');
-  var link = document.getElementById('posterLink');
-  var title = document.getElementById('posterTitle');
-  var dots = document.getElementById('posterDots');
-  if(!img || !link || !title || !dots || !POSTERS[index]) return;
-  
-  var p = POSTERS[index];
-  img.src = p.img;
-  link.href = p.link || 'javascript:void(0);';
-  img.style.cursor = 'pointer';
-  if(p.link){
-    img.onclick = null;    // 有跳转链接时，点击事件自然冒泡到 <a> 标签实现跳转
-  } else {
-    img.onclick = function(){ openPosterLightbox(p.img); };  // 无链接时点击放大看大图
-  }
-  title.textContent = p.school;
-  posterIndex = index;
-  
-  // 更新指示点
-  var dotEls = dots.querySelectorAll('span');
-  dotEls.forEach(function(dot, i){
-    dot.style.background = i === index ? '#a92122' : '#ddd';
-  });
-}

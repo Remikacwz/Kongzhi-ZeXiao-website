@@ -47,7 +47,7 @@
 <link rel="stylesheet" href="journey-home.css">
 <link rel="stylesheet" href="school-content.css?v=20260829">
 
-<!-- 早期广告状态同步：避免从子页面返回时QQ群广告闪现 -->
+<!-- 早期广告状态同步：避免从子页面返回时广告闪现 -->
 <script>
 (function(){
   try {
@@ -119,19 +119,8 @@ table thead .filter-sm.wide{width:100%;max-width:none;}
 .tag-blue{background:#dbeafe;color:#1e40af;}
 .tag-green{background:#d1fae5;color:#166534;}
 .tag-orange{background:#ffedd5;color:#9a3412;}
-.ad-qq-group-desktop{display:flex;}
-.ad-qq-group-mobile{display:none;}
-@media(max-width:768px){
-.ad-qq-group-desktop{display:none !important;}
-.ad-qq-group-mobile{display:flex !important;}
-}
 /* 广告关闭时立即隐藏（避免闪现） */
-html.ad-disabled .ad-qq-group{display:none !important;}
-html.ad-disabled #posterCarousel{display:none !important;}
 html.ad-disabled #detailAds{display:none !important;}
-html.ad-disabled #qqGroupCard{display:none !important;}
-html.ad-disabled [id^="qr-link-"]{display:none !important;}
-html.ad-disabled [id^="qq-"]{display:none !important;}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:50;display:none;align-items:center;justify-content:center;}
 .modal-overlay.active{display:flex;}
 .modal-card{background:#FFFFFF;border-radius:12px;padding:24px;max-width:700px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.4);}
@@ -246,16 +235,11 @@ h1,h2,h3{font-weight:700;color:#17191d;text-shadow:0 0 8px rgba(169,33,34,0.2);}
 
 .filter-bar{position:sticky;top:0;z-index:25;background:linear-gradient(to bottom,#f8f8f6 0%,#f8f8f6 95%,transparent 100%);padding:12px 0 8px;margin-bottom:12px;}
 @media(max-width:768px){.filter-bar{position:sticky;top:0;z-index:25;padding:8px 0;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}}
-.qr-lightbox-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:none;align-items:center;justify-content:center;cursor:zoom-out;}
-.qr-lightbox-overlay.active{display:flex;}
-.qr-lightbox-overlay img{width:300px;height:300px;object-fit:contain;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);border:4px solid #fff;background:#fff;}
-
 @media(max-width:768px){
   #detailPage .container{padding:0 !important;}
   #detailPage .card{border-radius:0 !important;margin:0 !important;}
   #detailPage .modal-card{max-width:100vw !important;border-radius:0 !important;margin:0 !important;height:100vh;}
 }
-@media(max-width:768px){.qr-lightbox-overlay img{width:260px;height:260px;}}
 @media (max-width:768px){
 .page{padding:12px;max-width:100vw;padding-top:max(12px, env(safe-area-inset-top));}
 
@@ -309,8 +293,6 @@ header p{font-size:.85rem !important;}
 
 /* 筛选区 + 广告条：垂直堆叠 */
 #homePage>div[style*="display:flex"][style*="gap:16px"]:nth-of-type(2){flex-direction:column !important;}
-#homePage>div[style*="display:flex"][style*="gap:16px"]:nth-of-type(2) .ad-course-link{width:100% !important;}
-#homePage>div[style*="display:flex"][style*="gap:16px"]:nth-of-type(2) .ad-course-link>div{min-width:unset !important;padding:10px !important;}
 
 /* 筛选器：更紧凑 */
 #homePage .card.p-4 .flex-wrap.gap-2.items-end{gap:4px !important;}
@@ -321,7 +303,6 @@ header p{font-size:.85rem !important;}
 #homePage .card.p-4 .flex-wrap.gap-2.items-end>button{width:calc(50% - 2px) !important;padding:6px 10px !important;font-size:12px !important;}
 
 /* 主内容区：右侧图表隐藏 */
-#posterCarousel{display:none !important;}
 #adContainer{display:none !important;}
 #mainContentArea>div:last-child{flex-direction:column !important;}
 #mainContentArea>div:last-child>div:last-child{display:none !important;} /* 隐藏右侧图表栏 */
@@ -377,7 +358,6 @@ header p{font-size:.85rem !important;}
 .modal-close{width:28px !important;height:28px !important;font-size:16px !important;}
 .modal-grid{grid-template-columns:1fr !important;gap:8px !important;}
 .modal-list li{font-size:12px !important;padding:4px 0 !important;}
-.qr-lightbox-overlay img{width:240px !important;height:240px !important;}
 #backToTop{width:40px !important;height:40px !important;font-size:16px !important;}
 
 /* 其他 */
@@ -457,7 +437,6 @@ header .flex{flex-wrap:wrap;gap:8px;justify-content:center;overflow-x:auto;}
 #homePage .card.p-4 .flex-wrap.gap-2.items-end>div label{font-size:10px;}
 #homePage .card.p-4 .flex-wrap.gap-2.items-end>div[style*="display:flex"]{width:calc(50% - 2px);align-items:center;}
 #homePage .card.p-4 .flex-wrap.gap-2.items-end>button{width:calc(50% - 2px);padding:6px 10px;font-size:12px;}
-#posterCarousel{display:none !important;}
 #adContainer{display:none !important;}
 #mainContentArea>div:last-child{grid-template-columns:1fr !important;}
 #mainContentArea .chart-container{padding:10px;}
@@ -498,7 +477,6 @@ header .flex{flex-wrap:wrap;gap:8px;justify-content:center;overflow-x:auto;}
 .modal-close{width:28px;height:28px;font-size:16px;}
 .modal-grid{grid-template-columns:1fr;gap:8px;}
 .modal-list li{font-size:12px;padding:4px 0;}
-.qr-lightbox-overlay img{width:240px !important;height:240px !important;}
 #backToTop{width:40px;height:40px;font-size:16px;}
 }
 .modal-box { background: #fff; border-radius: 12px; max-width: 720px; width: 90%; max-height: 85vh; overflow-y: auto; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative; }
@@ -827,18 +805,10 @@ header .flex{flex-wrap:wrap;gap:8px;justify-content:center;overflow-x:auto;}
     gap: 10px !important;
   }
 
-  #favBtn,
-  .ad-course-link {
+  #favBtn {
     width: 100% !important;
     max-width: 100% !important;
     align-self: stretch !important;
-  }
-
-  .ad-course-link > .card,
-  .ad-course-link > div,
-  .ad-course-link > div > div {
-    width: 100% !important;
-    min-width: 0 !important;
   }
 
   .heat-rank-btn {
@@ -956,15 +926,8 @@ header .flex{flex-wrap:wrap;gap:8px;justify-content:center;overflow-x:auto;}
   }
   #homePage > header { order: 0; }
   #homePage > #heatRankSection { order: 1; }
-  #homePage > .ad-qq-group-mobile { order: 2; }
   #homePage > .mb-6 { order: 3; }
   #homePage > #mainContentArea { order: 4; }
-  /* 资料与课程广告（筛选容器内部）：移到筛选卡片上方 */
-  #homePage > .mb-6 > .ad-course-link {
-    order: -1 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
   /* 目标院校按钮紧随筛选卡片之后 */
   #homePage > .mb-6 > #favBtn {
     order: 0 !important;
@@ -974,7 +937,6 @@ header .flex{flex-wrap:wrap;gap:8px;justify-content:center;overflow-x:auto;}
 
 @supports (height: 100dvh) {
   .modal-overlay,
-  .qr-lightbox-overlay,
   #imgLightbox {
     min-height:100dvh;
   }
@@ -1529,41 +1491,9 @@ var _hmt = _hmt || [];
 
     <!-- 中间：目标院校按钮 -->
     <button class="nav-pill-lg" title="目标院校" onclick="toggleFavoriteFilter()" id="favBtn" style="background:linear-gradient(135deg,#e63946 0%,#a92122 100%);border:none;cursor:pointer;flex-shrink:0;align-self:stretch;display:flex;align-items:center;justify-content:center;padding:12px 16px;font-size:16px;border-radius:16px;white-space:nowrap;"><svg class="li-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>目标院校</button>
-
-      <!-- 右侧：资料与课程广告 -->
-      <a href="专业课选择/资料和课程.html" style="text-decoration:none;display:block;flex-shrink:0;" class="ad-course-link">
-        <div class="card" style="padding:0;background:linear-gradient(135deg,#F8A862 0%,#FFB347 100%);border:none;transition:transform .2s,box-shadow .2s;cursor:pointer;height:100%;display:flex;align-items:center;justify-content:center;"
-             onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(248,168,98,0.35)'"
-             onmouseout="this.style.transform='';this.style.boxShadow='none'">
-          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 16px;text-align:center;min-width:170px;height:100%;">
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="font-size:18px;display:inline-flex;align-items:center;"><svg class="li-ico" viewBox="0 0 24 24"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></svg></span>
-              <span style="font-size:28px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.18);letter-spacing:1.5px;">资料与课程</span>
-            </div>
-              <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-align:center;width:100%;text-shadow:0 1px 2px rgba(0,0,0,0.18);">点我了解详情 →</div>
-          </div>
-        </div>
-      </a>
     </div>
 
-  <!-- 考研交流群（移动端显示） -->
-  <a class="bilibili-entry bilibili-entry--mobile card mb-4" href="https://space.bilibili.com/589801594?spm_id_from=333.337.0.0" target="_blank" rel="noopener noreferrer" aria-label="前往控制考研阿祖的 B 站主页">
-    <img class="bilibili-entry__avatar" src="专业课选择/images/平台图标/avatar_azhu.jpg" alt="控制考研阿祖">
-    <span class="bilibili-entry__copy"><small>B 站主页</small><strong>@控制考研阿祖</strong><em>经验分享 · 择校更新</em></span>
-    <img class="bilibili-entry__platform" src="专业课选择/images/平台图标/B站.jpg" alt="">
-  </a>
-  <div class="card p-4 mb-4 ad-qq-group ad-qq-group-mobile" style="gap:20px;justify-content:center;flex-wrap:wrap;">
-    <div data-media-slot="home_qr_27" style="flex:1;min-width:140px;max-width:260px;padding:0;background:#fff;border:0;box-shadow:none;border-radius:12px;text-align:center;display:flex;flex-direction:column;overflow:hidden;" title="点击查看大图">
-        <div data-media-title style="font-size:12px;font-weight:700;color:#a92122;padding:8px 10px;background:#fff;flex-shrink:0;margin:0;">🎓 27考研交流群</div>
-      <img data-media-image src="专业课选择/images/27考研群/27.jpg" alt="27考研交流群" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;cursor:pointer;" loading="lazy" onclick="openImageLightbox('专业课选择/images/27考研群/27.jpg')">
-    </div>
-    <div data-media-slot="home_qr_28" style="flex:1;min-width:140px;max-width:260px;padding:0;background:#fff;border:0;box-shadow:none;border-radius:12px;text-align:center;display:flex;flex-direction:column;overflow:hidden;" title="点击查看大图">
-        <div data-media-title style="font-size:12px;font-weight:700;color:#a92122;padding:8px 10px;background:#fff;flex-shrink:0;margin:0;">🎓 28考研交流群</div>
-      <img data-media-image src="专业课选择/images/27考研群/28.jpg" alt="28考研交流群" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;cursor:pointer;" loading="lazy" onclick="openImageLightbox('专业课选择/images/27考研群/28.jpg')">
-    </div>
-  </div>
-
-  <!-- 学校列表 + 海报轮播 + 广告 -->
+  <!-- 学校列表 + 右侧图表区 -->
   <div style="display:flex;flex-direction:column;gap:16px;" id="mainContentArea">
     <!-- 第一行：学校列表 + 右侧栏并排 -->
     <div style="display:flex;gap:16px;align-items:flex-start;">
@@ -1625,7 +1555,7 @@ var _hmt = _hmt || [];
               <span>© 2026</span>
               <span style="color:#deded8;">|</span>
               <span style="color:#a92122;font-weight:600;">数据更新：2026-08-15</span>
-              
+
               <span style="color:#deded8;">|</span>
               <span>designed by <a href="https://space.bilibili.com/589801594?spm_id_from=333.337.0.0" target="_blank" style="color:#3e4146;text-decoration:none;">@控制考研阿祖</a></span>
             </div>
@@ -1635,31 +1565,7 @@ var _hmt = _hmt || [];
 
       <!-- 右侧栏：图表 -->
       <div style="width:280px;flex-shrink:0;display:flex;flex-direction:column;gap:12px;">
-        <a class="bilibili-entry bilibili-entry--desktop" href="https://space.bilibili.com/589801594?spm_id_from=333.337.0.0" target="_blank" rel="noopener noreferrer" aria-label="前往控制考研阿祖的 B 站主页">
-          <img class="bilibili-entry__avatar" src="专业课选择/images/平台图标/avatar_azhu.jpg" alt="控制考研阿祖">
-          <span class="bilibili-entry__copy"><small>B 站主页</small><strong>@控制考研阿祖</strong><em>经验分享 · 择校更新</em></span>
-          <img class="bilibili-entry__platform" src="专业课选择/images/平台图标/B站.jpg" alt="">
-        </a>
-        <!-- 考研交流群（电脑端显示） -->
-        <div class="ad-qq-group ad-qq-group-desktop" style="display:flex;gap:20px;">
-          <div data-media-slot="home_qr_27" style="flex:1;padding:0;background:#fff;border:0;box-shadow:none;border-radius:12px;text-align:center;display:flex;flex-direction:column;overflow:hidden;" title="点击查看大图">
-            <div data-media-title style="font-size:12px;font-weight:700;color:#a92122;padding:8px 10px;background:#fff;flex-shrink:0;margin:0;">🎓 27考研交流群</div>
-            <img data-media-image src="专业课选择/images/27考研群/27.jpg" alt="27考研交流群" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;cursor:pointer;" loading="lazy" onclick="openImageLightbox('专业课选择/images/27考研群/27.jpg')">
-          </div>
-          <div data-media-slot="home_qr_28" style="flex:1;padding:0;background:#fff;border:0;box-shadow:none;border-radius:12px;text-align:center;display:flex;flex-direction:column;overflow:hidden;" title="点击查看大图">
-              <div data-media-title style="font-size:12px;font-weight:700;color:#a92122;padding:8px 10px;background:#fff;flex-shrink:0;margin:0;">🎓 28考研交流群</div>
-            <img data-media-image src="专业课选择/images/27考研群/28.jpg" alt="28考研交流群" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;cursor:pointer;" loading="lazy" onclick="openImageLightbox('专业课选择/images/27考研群/28.jpg')">
-          </div>
-        </div>
-        <!-- 院校海报轮播 -->
-        <div class="chart-container" id="posterCarousel" style="padding:10px;display:none;">
-          <h3 style="font-size:12px;font-weight:700;color:#17191d;margin-bottom:4px;">院校海报</h3>
-          <a id="posterLink" href="" style="display:block;text-align:center;">
-            <img id="posterImg" src="" alt="" style="width:100%;height:auto;display:block;border-radius:8px;cursor:pointer;">
-          </a>
-          <div id="posterTitle" style="font-size:12px;font-weight:600;color:#17191d;text-align:center;margin-top:4px;"></div>
-          <div id="posterDots" style="display:flex;justify-content:center;gap:4px;margin-top:6px;"></div>
-        </div>
+
         <div class="chart-container" style="padding:10px;">
           <h3 style="font-size:12px;font-weight:700;color:#17191d;margin-bottom:4px;">各省份招生人数分布</h3>
           <div id="chartProvinceSide" style="height:160px;"></div>
@@ -1694,10 +1600,6 @@ var _hmt = _hmt || [];
     <div class="chart-container">
       <h3 id="hDetailCollege" class="font-bold text-gray-700 mb-3">各学院招生情况</h3>
       <div id="chartDetailCollege" style="height:360px;"></div>
-    </div>
-    <div id="qqGroupCard" class="card p-4" style="display:none;">
-      <h3 style="font-size:12px;font-weight:700;color:#17191d;margin-bottom:8px;"><svg class="li-ico" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>院校QQ群</h3>
-      <div id="qqGroupContent" style="text-align:center;"></div>
     </div>
   </div>
 
@@ -1878,7 +1780,7 @@ var _hmt = _hmt || [];
 }
 .hero-channels .hc-links a{height:42px;padding:0 8px;gap:8px}
 .hero-channels .hc-links a .li-ico{width:16px;height:16px}
-@media(max-width:768px){body>.mb-6{flex-direction:column !important;gap:10px !important}body>.mb-6>#favBtn,body>.mb-6>.ad-course-link{width:100% !important;max-width:100% !important}body>.mb-6>.ad-course-link{order:-1 !important}}
+@media(max-width:768px){body>.mb-6{flex-direction:column !important;gap:10px !important}body>.mb-6>#favBtn{width:100% !important;max-width:100% !important}}
 </style>
 <script src="nav-render.js"></script>
 <script>
