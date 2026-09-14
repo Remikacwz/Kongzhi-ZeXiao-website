@@ -179,7 +179,7 @@ def major_table(sch):
     for p in sch['专业']:
         subs = '；'.join(f'{k} {v}' for k, v in p['科目'].items())
         rows.append(f"<tr><td>{esc(p['学院'])}</td><td>{esc(p['代码'])}</td><td>{esc(p['名称'])}</td>"
-                    f"<td>{esc(p['招生计划'])}</td><td>{esc(p['实际录取'])}</td><td>{esc(p['变化'])}</td>"
+                    f"<td>{esc(p['招生计划']) or '暂无数据'}</td><td>{esc(p['实际录取'])}</td><td>{esc(p['变化'])}</td>"
                     f"<td>{esc(subs)}</td><td>{esc(p['备注'])}</td></tr>")
     return '\n'.join(rows)
 
