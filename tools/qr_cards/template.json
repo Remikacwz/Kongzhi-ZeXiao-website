@@ -1,0 +1,36 @@
+{
+ "canvas": {
+  "width": 944,
+  "height": 1164,
+  "background": "#ffffff"
+ },
+ "qr": {
+  "x": 89,
+  "y": 127,
+  "size": 766,
+  "version": 5,
+  "error_correction": "M",
+  "module_px": 20,
+  "border": 0,
+  "dark": "#000000",
+  "light": "#ffffff",
+  "logo_ratio": 0.22,
+  "logo_pad": 12
+ },
+ "line1": {
+  "y": 990,
+  "size": 46,
+  "bold": true,
+  "color": "#000000",
+  "text": "{school}",
+  "font": "msyhbd.ttc"
+ },
+ "line2": {
+  "y": 1076,
+  "size": 34,
+  "bold": false,
+  "color": "#000000",
+  "text": "控制考研交流群",
+  "font": "msyh.ttc"
+ }
+}
