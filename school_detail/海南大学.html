@@ -83,6 +83,65 @@ footer{text-align:center;color:#999;font-size:12px;padding:20px}
   <div class="card"><p>暂无历年招生数据</p></div>
   <h2>四、26考研录取情况分析</h2>
   
+<div class="card">
+  <h3>四、26考研控制工程专硕复试情况分析</h3>
+  <p class="stat">进复试 <b>32</b> 人 · 实际录取 <b>32</b> 人 · 复录比 <b></b></p>
+  <p class="score">复试初试：最高 442.0 / 最低 376.0 / 平均 398.1　|　录取初试：最高  / 最低  / 平均 　|　专业课均分 131.0 · 数学均分 120.9</p>
+  <p class="subavg">各科均分：政治 71.9 · 英语 74.2 · 数学 120.9 · 专业课 131.0</p>
+  <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>440-449</td><td>1</td><td>79</td><td>89</td><td>133</td><td>141</td><td>442</td><td></td></tr><tr><td>430-439</td><td>2</td><td>74</td><td>77</td><td>142.5</td><td>142.5</td><td>436</td><td></td></tr><tr><td>410-419</td><td>5</td><td>71.6</td><td>78.2</td><td>130</td><td>133</td><td>412.8</td><td></td></tr><tr><td>400-410</td><td>6</td><td>72.3</td><td>76.3</td><td>120.7</td><td>133.7</td><td>403</td><td></td></tr><tr><td>390-399</td><td>6</td><td>71.2</td><td>70</td><td>121.8</td><td>130.7</td><td>393.7</td><td></td></tr><tr><td>380-389</td><td>7</td><td>72</td><td>73.7</td><td>112.7</td><td>126.3</td><td>384.7</td><td></td></tr><tr><td>370-379</td><td>5</td><td>70</td><td>69.6</td><td>111.6</td><td>126.4</td><td>3727.6</td><td></td></tr></tbody></table>
+  <div style="height:220px;"><canvas id="chart-0"></canvas></div>
+</div>
+<script>
+try {
+  var ctx = document.getElementById('chart-0');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["440-449", "430-439", "410-419", "400-410", "390-399", "380-389", "370-379"],
+      datasets: [
+        { label: '复试人数', data: ["1", "2", "5", "6", "6", "7", "5"], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
+        { label: '录取人数', data: ["79", "74", "71.6", "72.3", "71.2", "72", "70"], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+animation: { duration: 550, easing: 'easeOutQuart' },
+scales: {
+  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
+  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
+}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
+  });
+} catch(e) { console.error(e); }
+</script>
+
+<div class="card">
+  <h3>五、26考研仪器仪表工程专硕复试情况分析</h3>
+  <p class="stat">进复试 <b></b> 人 · 实际录取 <b>30</b> 人 · 复录比 <b></b></p>
+  <p class="score">复试初试：最高 425.0 / 最低 288.0 / 平均 347.8　|　录取初试：最高  / 最低  / 平均 　|　专业课均分 115.8 · 数学均分 93.2</p>
+  <p class="subavg">各科均分：政治 68.5 · 英语 71.6 · 数学 93.2 · 专业课 115.8</p>
+  <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>420-429</td><td>1</td><td>75</td><td>79</td><td>139</td><td>132</td><td>425</td><td></td></tr><tr><td>410-419</td><td>2</td><td>74</td><td>85</td><td>132</td><td>126</td><td>417</td><td></td></tr><tr><td>390-399</td><td>2</td><td>73</td><td>71</td><td>112.5</td><td>134.5</td><td>391</td><td></td></tr><tr><td>380-389</td><td>2</td><td>69</td><td>78.5</td><td>107.5</td><td>130.5</td><td>385.5</td><td></td></tr><tr><td>370-379</td><td>3</td><td>72.7</td><td>72</td><td>102.7</td><td>126.3</td><td>373.7</td><td></td></tr><tr><td>360-369</td><td>2</td><td>68</td><td>70.5</td><td>107</td><td>121.5</td><td>367</td><td></td></tr><tr><td>350-359</td><td>1</td><td>72</td><td>66</td><td>85</td><td>130</td><td>353</td><td></td></tr><tr><td>340-349</td><td>2</td><td>67</td><td>62.5</td><td>92.5</td><td>127</td><td>349</td><td></td></tr><tr><td>330-339</td><td>2</td><td>66</td><td>68</td><td>91</td><td>108</td><td>333</td><td></td></tr><tr><td>320-329</td><td>4</td><td>69.2</td><td>74</td><td>77</td><td>105</td><td>325.2</td><td></td></tr><tr><td>310-319</td><td>4</td><td>63.8</td><td>70.5</td><td>80.5</td><td>100.8</td><td>315.5</td><td></td></tr><tr><td>300-309</td><td>2</td><td>64</td><td>65.5</td><td>65.5</td><td>110.5</td><td>303.5</td><td></td></tr><tr><td>290-299</td><td>2</td><td>70</td><td>73.5</td><td>73.5</td><td>97.5</td><td>296.5</td><td></td></tr><tr><td>280-289</td><td>1</td><td>57</td><td>61</td><td>71</td><td>99</td><td>288</td><td></td></tr></tbody></table>
+  <div style="height:220px;"><canvas id="chart-1"></canvas></div>
+</div>
+<script>
+try {
+  var ctx = document.getElementById('chart-1');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["420-429", "410-419", "390-399", "380-389", "370-379", "360-369", "350-359", "340-349", "330-339", "320-329", "310-319", "300-309", "290-299", "280-289"],
+      datasets: [
+        { label: '复试人数', data: ["1", "2", "2", "2", "3", "2", "1", "2", "2", "4", "4", "2", "2", "1"], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
+        { label: '录取人数', data: ["75", "74", "73", "69", "72.7", "68", "72", "67", "66", "69.2", "63.8", "64", "70", "57"], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+animation: { duration: 550, easing: 'easeOutQuart' },
+scales: {
+  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
+  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
+}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
+  });
+} catch(e) { console.error(e); }
+</script>
   <footer>数据来源：《27考研择校宝典_版8》（控制类）· 仅供参考，最终以院校官方为准</footer>
 </div>
 

@@ -83,16 +83,46 @@ footer{text-align:center;color:#999;font-size:12px;padding:20px}
   <h2>四、26考研录取情况分析</h2>
   
 <div class="card">
-  <h3>六、26考研控制科学与工程学硕录取情况分析</h3>
-  <p class="stat">进复试 <b>13</b> 人 · 实际录取 <b>13</b> 人 · 复录比 <b></b></p>
-  <p class="score">复试初试：最高 335.0 / 最低 296.0 / 平均 310.5　|　录取初试：最高 335.0 / 最低 296.0 / 平均 310.5　|　专业课均分 100.0 · 数学均分 88.0</p>
-  <p class="subavg">各科均分：政治 63.9 · 英语 25.4 · 数学 88.0 · 专业课 100.0</p>
-  <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>330-339</td><td>1</td><td>1</td><td>100.0%</td><td>62.0</td><td>75.0</td><td>102.0</td><td>96.0</td><td>335.0</td><td></td></tr><tr><td>320-329</td><td>3</td><td>3</td><td>100.0%</td><td>64.0</td><td>65.3</td><td>95.0</td><td>98.0</td><td>322.3</td><td></td></tr><tr><td>310-319</td><td>3</td><td>3</td><td>100.0%</td><td>63.7</td><td>58.3</td><td>90.0</td><td>99.7</td><td>311.7</td><td></td></tr><tr><td>300-309</td><td>4</td><td>4</td><td>100.0%</td><td>62.8</td><td>54.5</td><td>85.8</td><td>99.0</td><td>302.0</td><td></td></tr><tr><td>290-299</td><td>2</td><td>2</td><td>100.0%</td><td>67.5</td><td>47.5</td><td>72.0</td><td>109.0</td><td>296.0</td><td></td></tr></tbody></table>
+  <h3>四、控制工程专硕录取情况分析</h3>
+  <p class="stat">进复试 <b>54</b> 人 · 实际录取 <b>41</b> 人 · 复录比 <b>1.37</b></p>
+  <p class="score">复试初试：最高 372.0 / 最低 292.0 / 平均 335.9　|　录取初试：最高 372.0 / 最低 301.0 / 平均 343.0　|　专业课均分 100.5 · 数学均分 103.2</p>
+  <p class="subavg">各科均分：政治 64.1 · 英语 68.1 · 数学 103.2 · 专业课 100.5</p>
+  <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>370-379</td><td>4</td><td>3</td><td>75.0%</td><td>63.7</td><td>64.7</td><td>123.0</td><td>119.0</td><td>370.3</td><td></td></tr><tr><td>360-369</td><td>9</td><td>9</td><td>100.0%</td><td>64.3</td><td>70.4</td><td>117.2</td><td>113.1</td><td>365.1</td><td></td></tr><tr><td>350-359</td><td>7</td><td>7</td><td>100.0%</td><td>63.1</td><td>73.1</td><td>110.9</td><td>108.1</td><td>355.3</td><td></td></tr><tr><td>340-349</td><td>5</td><td>3</td><td>60.0%</td><td>68.0</td><td>75.3</td><td>118.0</td><td>81.3</td><td>342.7</td><td></td></tr><tr><td>330-339</td><td>7</td><td>7</td><td>100.0%</td><td>63.9</td><td>68.7</td><td>101.3</td><td>100.3</td><td>334.1</td><td></td></tr><tr><td>320-329</td><td>6</td><td>5</td><td>83.3%</td><td>64.8</td><td>67.6</td><td>105.6</td><td>87.2</td><td>325.2</td><td></td></tr><tr><td>310-319</td><td>6</td><td>5</td><td>83.3%</td><td>64.4</td><td>64.6</td><td>95.0</td><td>91.2</td><td>315.2</td><td></td></tr><tr><td>300-309</td><td>6</td><td>2</td><td>33.3%</td><td>67.5</td><td>65.5</td><td>95.5</td><td>76.0</td><td>304.5</td><td></td></tr><tr><td>290-299</td><td>4</td><td>0</td><td>0.0%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
   <div style="height:220px;"><canvas id="chart-0"></canvas></div>
 </div>
 <script>
 try {
   var ctx = document.getElementById('chart-0');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["370-379", "360-369", "350-359", "340-349", "330-339", "320-329", "310-319", "300-309", "290-299"],
+      datasets: [
+        { label: '复试人数', data: ["4", "9", "7", "5", "7", "6", "6", "6", "4"], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
+        { label: '录取人数', data: ["3", "9", "7", "3", "7", "5", "5", "2", "0"], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+animation: { duration: 550, easing: 'easeOutQuart' },
+scales: {
+  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
+  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
+}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
+  });
+} catch(e) { console.error(e); }
+</script>
+
+<div class="card">
+  <h3>六、26考研控制科学与工程学硕录取情况分析</h3>
+  <p class="stat">进复试 <b>13</b> 人 · 实际录取 <b>13</b> 人 · 复录比 <b></b></p>
+  <p class="score">复试初试：最高 335.0 / 最低 296.0 / 平均 310.5　|　录取初试：最高 335.0 / 最低 296.0 / 平均 310.5　|　专业课均分 100.0 · 数学均分 88.0</p>
+  <p class="subavg">各科均分：政治 63.9 · 英语 25.4 · 数学 88.0 · 专业课 100.0</p>
+  <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>330-339</td><td>1</td><td>1</td><td>100.0%</td><td>62.0</td><td>75.0</td><td>102.0</td><td>96.0</td><td>335.0</td><td></td></tr><tr><td>320-329</td><td>3</td><td>3</td><td>100.0%</td><td>64.0</td><td>65.3</td><td>95.0</td><td>98.0</td><td>322.3</td><td></td></tr><tr><td>310-319</td><td>3</td><td>3</td><td>100.0%</td><td>63.7</td><td>58.3</td><td>90.0</td><td>99.7</td><td>311.7</td><td></td></tr><tr><td>300-309</td><td>4</td><td>4</td><td>100.0%</td><td>62.8</td><td>54.5</td><td>85.8</td><td>99.0</td><td>302.0</td><td></td></tr><tr><td>290-299</td><td>2</td><td>2</td><td>100.0%</td><td>67.5</td><td>47.5</td><td>72.0</td><td>109.0</td><td>296.0</td><td></td></tr></tbody></table>
+  <div style="height:220px;"><canvas id="chart-1"></canvas></div>
+</div>
+<script>
+try {
+  var ctx = document.getElementById('chart-1');
   new Chart(ctx, {
     type: 'bar',
     data: {

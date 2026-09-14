@@ -142,6 +142,36 @@ scales: {
   });
 } catch(e) { console.error(e); }
 </script>
+
+<div class="card">
+  <h3>六、25考研高端控制与智能运维研发中心录取情况分析</h3>
+  <p class="stat">进复试 <b>5</b> 人 · 实际录取 <b>4</b> 人 · 复录比 <b>80.0</b></p>
+  <p class="score">复试初试：最高 363.0 / 最低 324.0 / 平均 345.4　|　录取初试：最高  / 最低  / 平均 　|　专业课均分 109.8 · 数学均分 114.8</p>
+  <p class="subavg">各科均分：政治 61.2 · 英语 59.6 · 数学 114.8 · 专业课 109.8</p>
+  <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>360-369</td><td>2</td><td>2</td><td>100%</td><td>58.5</td><td>58</td><td>124</td><td>122.5</td><td>363</td><td></td></tr><tr><td>330-339</td><td>2</td><td>1</td><td>50%</td><td>62.5</td><td>61.5</td><td>108</td><td>106.5</td><td>339</td><td></td></tr><tr><td>320-329</td><td>1</td><td>1</td><td>100%</td><td>64</td><td>59</td><td>110</td><td>91</td><td>324</td><td></td></tr></tbody></table>
+  <div style="height:220px;"><canvas id="chart-2"></canvas></div>
+</div>
+<script>
+try {
+  var ctx = document.getElementById('chart-2');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["360-369", "330-339", "320-329"],
+      datasets: [
+        { label: '复试人数', data: ["2", "2", "1"], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
+        { label: '录取人数', data: ["2", "1", "1"], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+animation: { duration: 550, easing: 'easeOutQuart' },
+scales: {
+  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
+  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
+}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
+  });
+} catch(e) { console.error(e); }
+</script>
   <footer>数据来源：《27考研择校宝典_版8》（控制类）· 仅供参考，最终以院校官方为准</footer>
 </div>
 
