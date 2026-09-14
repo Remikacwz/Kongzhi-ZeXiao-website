@@ -28,19 +28,6 @@ CODEPAT  = r'(?:08|14)[0-9A-Za-z]{2,5}'
 CODE_HEAD = re.compile(r'^[（(]?\s*(%s)\s*[）)]?(?![0-9A-Za-z])' % CODEPAT)
 CODE_MID  = re.compile(r'^(?P<name>[^（(]{2,40}?)[（(](?P<code>%s)[）)]\s*(?P<tail>.*)$' % CODEPAT)
 DEG_HEAD  = re.compile(r'^【(?:%s)】\s*' % DEG)
-def _plan_is_bogus(plan, plan_raw, block):
-    """招生计划误抓成科目代码时判为无效（页面上应显示暂无数据）。"""
-    if plan is None:
-        return False
-    raw = str(plan_raw or '').strip()
-    if len(str(plan)) >= 3 and str(plan) == raw:
-        text = chr(10).join(x for x in block if x)
-        import re as _re
-        if _re.search(r'(?<![0-9])%d[^0-9]' % plan, text) and _re.search(r'%d[一-鿿]' % plan, text):
-            return True
-    return False
-
-
 BAD_NAME = ('研究方向', '初试科目', '复试科目', '招生计划', '预计招生', '科目', '备注', '复试笔试')
 # 尾部括注里出现这些词 => 是说明而非名称
 PAREN_KEEP = re.compile(r'[（(][^（()）]*(?:招生|全日制|学硕|专硕|学院|方向|学位|合作|计划|硕士|培养|专项)[^（()）]*[）)]$')
@@ -154,8 +141,6 @@ def parse_major(line, following=(), cur_college=''):
 
     # ── 计划 + 变化 ──
     plan, plan_raw, chg = _plan_from((tail,) + tuple(following))
-    if _plan_is_bogus(plan, plan_raw, (tail,) + tuple(following)):
-        plan, plan_raw = None, ''
     if not chg:
         mcx = CHANGE.search(tail) or CHANGE.search(s)
         if mcx: chg = mcx.group(0).strip('（）() ')
