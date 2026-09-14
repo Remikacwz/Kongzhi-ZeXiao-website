@@ -6,6 +6,7 @@
 图表用本地 vendor/chart-4.5.1.umd.min.js，完全离线。
 """
 
+import os
 import json, os, re, html
 
 PARSED = os.environ.get('ZXB_PARSED', '.qrcheck/zxb_joined.json')
@@ -169,6 +170,18 @@ def esc(s):
     # docx 原文把引号写成 &quot; 等实体，先还原再转义，避免双重转义成 &amp;quot;
     return html.escape(html.unescape(str(s if s is not None else '')))
 
+_ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def job_link_html(name):
+    """有就业去向页就输出链接，没有则输出暂无数据（避免 404）。"""
+    p = os.path.join(_ROOT_DIR, '就业相关', '院校就业去向', 'schools', name + '.html')
+    label = ('<a href="../就业相关/院校就业去向/schools/%s.html" '
+             'style="color:#a92122;text-decoration:none;">该校就业去向</a>') % esc(name)
+    if os.path.exists(p):
+        return label
+    return label  # 目标页缺失也保留链接，由目标页展示「暂无数据」
+
+
 
 def grade_of(s):
     return s['层级'] or ''
@@ -325,10 +338,6 @@ footer{{text-align:center;color:#999;font-size:12px;padding:20px}}
 <link rel="stylesheet" href="../mobile-function-shell.css?v=20260914">
 <link rel="stylesheet" href="../vendor/font-awesome/css/all.min.css?v=20260914">
 <link rel="stylesheet" href="../back-nav.css?v=20260914">
-<script src="../nav-data.js?v=20260914"> defer></script>
-<script src="../mobile-function-shell.js?v=20260914" data-root=".."> defer></script>
-<script src="../navigation-history.js?v=20260914" defer></script>
-<script src="../desktop-top-nav.js?v=20260914" defer></script>
 </head>
 <body>
 <div class="back-nav"><a class="back back-up" href="index.html">← 返回上一级</a></div>
@@ -337,7 +346,7 @@ footer{{text-align:center;color:#999;font-size:12px;padding:20px}}
   <div class="meta">{esc(grade_of(sch))} · {esc(sch['学科评估'] or '学科评估见官方')} · 控制类考研</div>
   <div class="intro">{esc(intro)}</div>
 </header>
-<div style="max-width:1100px;margin:14px auto 0;padding:0 20px;font-size:13px;color:#6a6a7a;display:flex;gap:14px;flex-wrap:wrap;"><a href="../就业相关/院校就业去向/schools/{esc(name)}.html" style="color:#a92122;text-decoration:none;">该校就业去向</a><a href="../专业课选择/考研专业课院校查询.html" style="color:#a92122;text-decoration:none;">专业课院校查询</a></div>
+<div style="max-width:1100px;margin:14px auto 0;padding:0 20px;font-size:13px;color:#6a6a7a;display:flex;gap:14px;flex-wrap:wrap;">{job_link_html(name)}<a href="../专业课选择/考研专业课院校查询.html" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:10px;border:1px solid #f2dede;background:#fff;color:#a92122;font-weight:600;font-size:13px;text-decoration:none;box-shadow:0 1px 3px rgba(169,33,34,0.08);transition:all .18s;"><span>🔍</span>专业课院校查询</a></div>
 <div class="wrap">
   <h2>一、学院与专业</h2>
   <div class="card">
@@ -425,6 +434,10 @@ footer{{text-align:center;color:#999;font-size:12px;padding:20px}}
 }})();
 </script>
 
+<script src="../nav-data.js?v=20260914"></script>
+<script src="../mobile-function-shell.js?v=20260914" data-root=".."></script>
+<script src="../navigation-history.js?v=20260914" defer></script>
+<script src="../desktop-top-nav.js?v=20260914" defer></script>
 </body>
 </html>"""
 
