@@ -113,7 +113,21 @@ def render_card(image_bytes, school, group_name):
     rendered = rendered.resize((code.modules_count * module_px, code.modules_count * module_px), Image.NEAREST)
     layer = Image.new('RGB', (qr_conf['size'], qr_conf['size']), qr_conf['light'])
     layer.paste(rendered, ((qr_conf['size'] - rendered.width) // 2, (qr_conf['size'] - rendered.height) // 2))
-    if _looks_like_logo(logo):
+    logo = None
+    for candidate in (BASE_DIR / '专业课选择' / 'images' / '校徽',
+                      BASE_DIR / 'tools' / 'qr_cards' / 'logos'):
+        for ext in ('.jpg', '.jpeg', '.png', '.webp'):
+            path = candidate / (str(school).strip() + ext)
+            if path.exists():
+                try:
+                    logo = Image.open(path).convert('RGB')
+                except Exception:
+                    logo = None
+                if logo is not None:
+                    break
+        if logo is not None:
+            break
+    if logo is not None:
         badge_side = int(qr_conf['size'] * qr_conf['logo_ratio']); pad = qr_conf['logo_pad']
         badge = Image.new('RGB', (badge_side + pad * 2, badge_side + pad * 2), qr_conf['light'])
         badge.paste(logo.resize((badge_side, badge_side), Image.LANCZOS), (pad, pad))
