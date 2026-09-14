@@ -26,15 +26,6 @@ import heat_rankings
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 DB_PATH = pathlib.Path(os.environ.get('KAOYAN_SQLITE_PATH', '') or BASE_DIR / '数据库' / 'admission.db').expanduser().resolve()
-
-try:  # 群二维码封面规范化（依赖缺失时自动降级为原行为）
-    import sys as _sys
-    _sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-    from qr_group import normalize_cover as _normalize_qr_cover
-except Exception:
-    def _normalize_qr_cover(session, school_id, values, existing=None):
-        return values
-
 UPLOAD_DIR = pathlib.Path(os.environ.get('KAOYAN_UPLOAD_DIR', '') or BASE_DIR / 'uploads' / 'content').expanduser().resolve()
 COOKIE_NAME = 'kaoyan_admin_session'
 SESSION_TTL = dt.timedelta(hours=8)
@@ -552,7 +543,6 @@ def _audit(conn, session, school_id, object_id, action, change, request_ip):
 
 def create_module(session: dict, school_id: int, body: dict, request_ip: str) -> dict:
     values = _module_values(body)
-    values = _normalize_qr_cover(session, school_id, values)
     with _LOCK, _connect() as conn:
         if not _can_manage_school(conn, session, school_id):
             raise PermissionError('没有该院校的管理权限')
@@ -584,7 +574,6 @@ def update_module(session: dict, module_id: int, body: dict, request_ip: str, au
         if not _can_manage_school(conn, session, school_id):
             raise PermissionError('没有该院校的管理权限')
         values = _module_values(body, existing)
-        values = _normalize_qr_cover(session, locals().get('school_id'), values, existing)
         conn.execute(
             'UPDATE school_content_modules SET type=?,title=?,description=?,link_url=?,cover_url=?,config_json=?,sort_order=?,status=?,publish_at=?,unpublish_at=?,updated_by=?,updated_at=? WHERE id=?',
             (values['type'], values['title'], values['description'], values['link_url'], values['cover_url'],
