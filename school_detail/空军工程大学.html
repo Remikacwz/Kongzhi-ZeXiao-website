@@ -119,9 +119,9 @@ scales: {
 </script>
 
 <div class="card">
-  <h3>六、26考研082500航空宇航科学与技术（001 航空工程学院）录取情况分析</h3>
-  <p class="stat">进复试 <b>1</b> 人 · 实际录取 <b>1</b> 人 · 复录比 <b></b></p>
-  <p class="score">复试初试：最高  / 最低  / 平均 　|　录取初试：最高 280.0 / 最低 280.0 / 平均 280.0</p>
+  <h3>五、26考研电子信息专硕（001 航空工程学院）录取情况分析</h3>
+  <p class="stat">进复试 <b></b> 人 · 实际录取 <b></b> 人 · 复录比 <b></b></p>
+  <p class="score">复试初试：最高  / 最低  / 平均 　|　录取初试：最高  / 最低  / 平均 </p>
   
   
   <div style="height:220px;"><canvas id="chart-1"></canvas></div>
@@ -149,9 +149,9 @@ scales: {
 </script>
 
 <div class="card">
-  <h3>七、26考研085400电子信息（005 装备管理与无人机工程学院）录取情况分析</h3>
+  <h3>六、26考研082500航空宇航科学与技术（001 航空工程学院）录取情况分析</h3>
   <p class="stat">进复试 <b>1</b> 人 · 实际录取 <b>1</b> 人 · 复录比 <b></b></p>
-  <p class="score">复试初试：最高  / 最低  / 平均 　|　录取初试：最高 404.0 / 最低 404.0 / 平均 404.0</p>
+  <p class="score">复试初试：最高  / 最低  / 平均 　|　录取初试：最高 280.0 / 最低 280.0 / 平均 280.0</p>
   
   
   <div style="height:220px;"><canvas id="chart-2"></canvas></div>
@@ -159,6 +159,66 @@ scales: {
 <script>
 try {
   var ctx = document.getElementById('chart-2');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [
+        { label: '复试人数', data: [], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
+        { label: '录取人数', data: [], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+animation: { duration: 550, easing: 'easeOutQuart' },
+scales: {
+  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
+  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
+}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
+  });
+} catch(e) { console.error(e); }
+</script>
+
+<div class="card">
+  <h3>七、26考研085400电子信息（005 装备管理与无人机工程学院）录取情况分析</h3>
+  <p class="stat">进复试 <b>1</b> 人 · 实际录取 <b>1</b> 人 · 复录比 <b></b></p>
+  <p class="score">复试初试：最高  / 最低  / 平均 　|　录取初试：最高 404.0 / 最低 404.0 / 平均 404.0</p>
+  
+  
+  <div style="height:220px;"><canvas id="chart-3"></canvas></div>
+</div>
+<script>
+try {
+  var ctx = document.getElementById('chart-3');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [
+        { label: '复试人数', data: [], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
+        { label: '录取人数', data: [], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+animation: { duration: 550, easing: 'easeOutQuart' },
+scales: {
+  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
+  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
+}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
+  });
+} catch(e) { console.error(e); }
+</script>
+
+<div class="card">
+  <h3>八、26考研082500航空宇航科学与技术（005 装备管理与无人机工程学院）录取情况分析</h3>
+  <p class="stat">进复试 <b></b> 人 · 实际录取 <b></b> 人 · 复录比 <b></b></p>
+  <p class="score">复试初试：最高  / 最低  / 平均 　|　录取初试：最高  / 最低  / 平均 </p>
+  
+  
+  <div style="height:220px;"><canvas id="chart-4"></canvas></div>
+</div>
+<script>
+try {
+  var ctx = document.getElementById('chart-4');
   new Chart(ctx, {
     type: 'bar',
     data: {

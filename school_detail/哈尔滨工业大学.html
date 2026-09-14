@@ -270,16 +270,46 @@ scales: {
 </script>
 
 <div class="card">
-  <h3>十一、26考研控制工程（深圳校区校企联培）录取情况分析</h3>
-  <p class="stat">进复试 <b>8</b> 人 · 实际录取 <b>6</b> 人 · 复录比 <b>1.33</b></p>
-  <p class="score">复试初试：最高 433.0 / 最低 395.0 / 平均 415.0　|　录取初试：最高 433.0 / 最低 395.0 / 平均 415.0　|　专业课均分 129.0 · 数学均分 134.0</p>
-  <p class="subavg">各科均分：政治 75.0 · 英语 75.0 · 数学 134.0 · 专业课 129.0</p>
-  <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>430-439</td><td>2</td><td>1</td><td>50.0%</td><td>74.0</td><td>79.0</td><td>145.0</td><td>135.0</td><td>433.0</td><td></td></tr><tr><td>420-429</td><td>1</td><td>1</td><td>100.0%</td><td>75.0</td><td>83.0</td><td>130.0</td><td>139.0</td><td>427.0</td><td></td></tr><tr><td>410-419</td><td>2</td><td>2</td><td>100.0%</td><td>73.5</td><td>75.0</td><td>135.5</td><td>133.0</td><td>417.0</td><td></td></tr><tr><td>400-409</td><td>1</td><td>1</td><td>100.0%</td><td>74.0</td><td>80.0</td><td>125.0</td><td>125.0</td><td>404.0</td><td></td></tr><tr><td>390-399</td><td>2</td><td>1</td><td>50.0%</td><td>81.0</td><td>58.0</td><td>135.0</td><td>121.0</td><td>395.0</td><td></td></tr></tbody></table>
+  <h3>十、26考研航空宇航科学与技术学硕录取情况分析</h3>
+  <p class="stat">进复试 <b></b> 人 · 实际录取 <b></b> 人 · 复录比 <b></b></p>
+  <p class="score">复试初试：最高  / 最低  / 平均 　|　录取初试：最高  / 最低  / 平均 </p>
+  
+  
   <div style="height:220px;"><canvas id="chart-6"></canvas></div>
 </div>
 <script>
 try {
   var ctx = document.getElementById('chart-6');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [
+        { label: '复试人数', data: [], backgroundColor: 'rgba(122,142,168,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 },
+        { label: '录取人数', data: [], backgroundColor: 'rgba(169,33,34,0.82)', borderRadius: { topLeft: 5, topRight: 5, bottomLeft: 0, bottomRight: 0 }, maxBarThickness: 22 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+animation: { duration: 550, easing: 'easeOutQuart' },
+scales: {
+  x: { grid: { display: false }, ticks: { font: { size: 10, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#777a80', maxRotation: 0 } },
+  y: { beginAtZero: true, grid: { color: 'rgba(23,25,29,0.06)', drawBorder: false }, ticks: { font: { size: 10 }, color: '#777a80', precision: 0 } }
+}, plugins: { legend: { position: 'top', labels: { font: { size: 11, family: "'Noto Sans SC', system-ui, sans-serif" }, color: '#6a6a7a', usePointStyle: true, pointStyle: 'circle', boxWidth: 8, boxHeight: 8 } } } }
+  });
+} catch(e) { console.error(e); }
+</script>
+
+<div class="card">
+  <h3>十一、26考研控制工程（深圳校区校企联培）录取情况分析</h3>
+  <p class="stat">进复试 <b>8</b> 人 · 实际录取 <b>6</b> 人 · 复录比 <b>1.33</b></p>
+  <p class="score">复试初试：最高 433.0 / 最低 395.0 / 平均 415.0　|　录取初试：最高 433.0 / 最低 395.0 / 平均 415.0　|　专业课均分 129.0 · 数学均分 134.0</p>
+  <p class="subavg">各科均分：政治 75.0 · 英语 75.0 · 数学 134.0 · 专业课 129.0</p>
+  <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>430-439</td><td>2</td><td>1</td><td>50.0%</td><td>74.0</td><td>79.0</td><td>145.0</td><td>135.0</td><td>433.0</td><td></td></tr><tr><td>420-429</td><td>1</td><td>1</td><td>100.0%</td><td>75.0</td><td>83.0</td><td>130.0</td><td>139.0</td><td>427.0</td><td></td></tr><tr><td>410-419</td><td>2</td><td>2</td><td>100.0%</td><td>73.5</td><td>75.0</td><td>135.5</td><td>133.0</td><td>417.0</td><td></td></tr><tr><td>400-409</td><td>1</td><td>1</td><td>100.0%</td><td>74.0</td><td>80.0</td><td>125.0</td><td>125.0</td><td>404.0</td><td></td></tr><tr><td>390-399</td><td>2</td><td>1</td><td>50.0%</td><td>81.0</td><td>58.0</td><td>135.0</td><td>121.0</td><td>395.0</td><td></td></tr></tbody></table>
+  <div style="height:220px;"><canvas id="chart-7"></canvas></div>
+</div>
+<script>
+try {
+  var ctx = document.getElementById('chart-7');
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -305,11 +335,11 @@ scales: {
   <p class="score">复试初试：最高 393.0 / 最低 389.0 / 平均 391.0　|　录取初试：最高 393.0 / 最低 389.0 / 平均 391.0　|　专业课均分 122.5 · 数学均分 123.0</p>
   <p class="subavg">各科均分：政治 73.0 · 英语 72.0 · 数学 123.0 · 专业课 122.5</p>
   <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>390-399</td><td>1</td><td>1</td><td>100.0%</td><td>71.0</td><td>75.0</td><td>119.0</td><td>128.0</td><td>393.0</td><td></td></tr><tr><td>380-389</td><td>1</td><td>1</td><td>100.0%</td><td>76.0</td><td>69.0</td><td>127.0</td><td>117.0</td><td>389.0</td><td></td></tr></tbody></table>
-  <div style="height:220px;"><canvas id="chart-7"></canvas></div>
+  <div style="height:220px;"><canvas id="chart-8"></canvas></div>
 </div>
 <script>
 try {
-  var ctx = document.getElementById('chart-7');
+  var ctx = document.getElementById('chart-8');
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -335,11 +365,11 @@ scales: {
   <p class="score">复试初试：最高 433.0 / 最低 395.0 / 平均 415.0　|　录取初试：最高 433.0 / 最低 395.0 / 平均 415.0　|　专业课均分 129.0 · 数学均分 134.0</p>
   <p class="subavg">各科均分：政治 75.0 · 英语 75.0 · 数学 134.0 · 专业课 129.0</p>
   <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>430-439</td><td>2</td><td>1</td><td>50.0%</td><td>74.0</td><td>79.0</td><td>145.0</td><td>135.0</td><td>433.0</td><td></td></tr><tr><td>420-429</td><td>1</td><td>1</td><td>100.0%</td><td>75.0</td><td>83.0</td><td>130.0</td><td>139.0</td><td>427.0</td><td></td></tr><tr><td>410-419</td><td>2</td><td>2</td><td>100.0%</td><td>73.5</td><td>75.0</td><td>135.5</td><td>133.0</td><td>417.0</td><td></td></tr><tr><td>400-409</td><td>1</td><td>1</td><td>100.0%</td><td>74.0</td><td>80.0</td><td>125.0</td><td>125.0</td><td>404.0</td><td></td></tr><tr><td>390-399</td><td>2</td><td>1</td><td>50.0%</td><td>81.0</td><td>58.0</td><td>135.0</td><td>121.0</td><td>395.0</td><td></td></tr></tbody></table>
-  <div style="height:220px;"><canvas id="chart-8"></canvas></div>
+  <div style="height:220px;"><canvas id="chart-9"></canvas></div>
 </div>
 <script>
 try {
-  var ctx = document.getElementById('chart-8');
+  var ctx = document.getElementById('chart-9');
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -365,11 +395,11 @@ scales: {
   <p class="score">复试初试：最高 423.0 / 最低 363.0 / 平均 386.0　|　录取初试：最高 423.0 / 最低 380.0 / 平均 392.0　|　专业课均分 123.0 · 数学均分 119.0</p>
   <p class="subavg">各科均分：政治 72.0 · 英语 71.0 · 数学 119.0 · 专业课 123.0</p>
   <table><thead><tr><th>分数段</th><th>复试人数</th><th>录取人数</th><th>录取率</th><th>政治</th><th>英语</th><th>数学</th><th>专业课</th><th>总分均分</th><th>备注</th></tr></thead><tbody><tr><td>420-429</td><td>1</td><td>1</td><td>100.0%</td><td>70.0</td><td>76.0</td><td>148.0</td><td>129.0</td><td>423.0</td><td></td></tr><tr><td>380-389</td><td>3</td><td>3</td><td>100.0%</td><td>72.0</td><td>72.7</td><td>115.7</td><td>121.3</td><td>381.7</td><td></td></tr><tr><td>360-369</td><td>1</td><td>0</td><td>0%</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
-  <div style="height:220px;"><canvas id="chart-9"></canvas></div>
+  <div style="height:220px;"><canvas id="chart-10"></canvas></div>
 </div>
 <script>
 try {
-  var ctx = document.getElementById('chart-9');
+  var ctx = document.getElementById('chart-10');
   new Chart(ctx, {
     type: 'bar',
     data: {
