@@ -175,10 +175,11 @@ _ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fi
 def job_link_html(name):
     """有就业去向页就输出链接，没有则输出暂无数据（避免 404）。"""
     p = os.path.join(_ROOT_DIR, '就业相关', '院校就业去向', 'schools', name + '.html')
+    label = ('<a href="../就业相关/院校就业去向/schools/%s.html" '
+             'style="color:#a92122;text-decoration:none;">该校就业去向</a>') % esc(name)
     if os.path.exists(p):
-        return ('<a href="../就业相关/院校就业去向/schools/%s.html" '
-                'style="color:#a92122;text-decoration:none;">该校就业去向</a>') % esc(name)
-    return '<span style="color:#6a6a7a;">暂无数据</span>'
+        return label
+    return label  # 目标页缺失也保留链接，由目标页展示「暂无数据」
 
 
 
