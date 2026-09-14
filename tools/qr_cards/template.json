@@ -8,14 +8,14 @@
   "x": 89,
   "y": 127,
   "size": 766,
-  "version": 5,
+  "version": 10,
   "error_correction": "M",
-  "module_px": 20,
   "border": 0,
   "dark": "#000000",
   "light": "#ffffff",
   "logo_ratio": 0.22,
-  "logo_pad": 12
+  "logo_pad": 12,
+  "modules": 57
  },
  "line1": {
   "y": 990,
