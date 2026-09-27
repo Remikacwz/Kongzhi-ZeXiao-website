@@ -56,6 +56,9 @@
   <button class="pg" data-url="就业相关/就业去向index.html">就业去向</button>
   <button class="pg" data-url="就业相关/job-listing/job-listing.html">校招岗位</button>
   <button class="pg" data-url="复试全攻略/index.html">复试攻略</button>
+  <button class="pg" data-url="真题思维导图/index.html">真题思维导图</button>
+  <button class="pg" data-url="真题思维导图/x/985/tianjin/2020/">导图卷页</button>
+  <button class="pg" data-url="真题思维导图/k/rl_02/">考点页</button>
 </div>
 
 <div class="phone">
@@ -103,6 +106,19 @@
       loadPage(b.dataset.url, true);
     });
   });
+
+  // 支持 ?url= 直接指定手机壳里要预览的页面（便于分享 / 深链查看）
+  (function () {
+    var want = new URLSearchParams(location.search).get('url');
+    if (!want) { return; }
+    var hit = null;
+    pgs.forEach(function (b) { if (b.dataset.url === want) { hit = b; } });
+    if (hit) {
+      pgs.forEach(function (x) { x.classList.remove('active'); });
+      hit.classList.add('active');
+    }
+    loadPage(want, true);
+  })();
 
   // 重播入场动画（首页）
   document.querySelector('.refresh').addEventListener('click', function() {
