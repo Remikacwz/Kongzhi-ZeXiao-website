@@ -355,6 +355,62 @@
   $('#schoolProfileConfigureBtn').addEventListener('click', function () { openSchoolModuleEditor(state.schoolManagerId, 0, false); });
   $('#schoolProfileAddBtn').addEventListener('click', function () { openSchoolModuleEditor(state.schoolManagerId, 0, true); });
 
+  function setupQrUpload() {
+    var btn = document.getElementById('qrUploadBtn');
+    if (!btn) return;
+    if (state.scope === 'exam') { btn.hidden = true; return; }
+    btn.addEventListener('click', openQrPanel);
+  }
+  function openQrPanel() {
+    var mask = document.getElementById('qrPanelMask');
+    if (!mask) {
+      mask = document.createElement('div');
+      mask.id = 'qrPanelMask';
+      mask.setAttribute('style', 'position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:80;display:flex;align-items:center;justify-content:center;');
+      mask.innerHTML = '<div style="background:#fff;border-radius:14px;padding:20px;width:310px;box-shadow:0 18px 40px rgba(0,0,0,.25);text-align:center;">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+        '<b style="font-size:15px;">QQ群二维码</b>' +
+        '<button type="button" id="qrPanelClose" style="border:0;background:none;font-size:18px;cursor:pointer;">×</button></div>' +
+        '<div id="qrPanelThumb" style="height:156px;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:12px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:10px;">未上传</div>' +
+        '<button type="button" id="qrPanelUpload" style="margin-top:14px;width:100%;padding:10px 0;border:0;border-radius:10px;background:#2563eb;color:#fff;font-size:14px;cursor:pointer;">上传图片</button>' +
+        '<p style="margin:10px 0 0;font-size:11px;color:#94a3b8;line-height:1.6;">只上传 QQ 群二维码截图即可，系统自动生成统一卡片并显示在院校展示位。</p></div>';
+      document.body.appendChild(mask);
+      mask.addEventListener('click', function (ev) { if (ev.target === mask) mask.style.display = 'none'; });
+      document.getElementById('qrPanelClose').addEventListener('click', function () { mask.style.display = 'none'; });
+      document.getElementById('qrPanelUpload').addEventListener('click', function () { pickQrImage(); });
+    }
+    mask.style.display = 'flex';
+    loadQrThumb();
+  }
+  function loadQrThumb() {
+    var box = document.getElementById('qrPanelThumb');
+    if (!box) return;
+    api('/api/admin/school-qr?school_id=' + state.schoolId).then(function (res) {
+      if (res && res.cover_url) {
+        var img = document.createElement('img');
+        img.src = adminAssetUrl(res.cover_url); img.alt = '群二维码';
+        img.setAttribute('style', 'max-height:150px;max-width:100%;border-radius:8px;');
+        box.innerHTML = ''; box.appendChild(img);
+        var up = document.getElementById('qrPanelUpload'); if (up) up.textContent = '更换图片';
+      }
+    }).catch(function () {});
+  }
+  function pickQrImage() {
+    var input = document.createElement('input');
+    input.type = 'file'; input.accept = 'image/png,image/jpeg,image/webp';
+    input.onchange = async function () {
+      var file = input.files && input.files[0]; if (!file) return;
+      try {
+        var base64 = await fileToBase64(file);
+        await api('/api/admin/school-qr', { method: 'POST', body: JSON.stringify({ school_id: state.schoolId, filename: file.name, base64: base64 }) });
+        toast('QQ群二维码已更新（院校展示位已同步）');
+        loadQrThumb();
+      } catch (err) { toast((err && err.message) || '上传失败'); }
+    };
+    input.click();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupQrUpload); else setupQrUpload();
+
   function renderModuleList() {
     els.moduleCount.textContent = state.modules.length + ' 个模块';
     if (!state.modules.length) {

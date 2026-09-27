@@ -1405,6 +1405,10 @@ def dispatch(method: str, path: str, query: dict, headers, raw_body: bytes, requ
             return 200, _ok(analytics_summary(session)), {}
         if path == '/api/admin/audit-logs' and method == 'GET':
             return 200, _ok(list_audit_logs(session, query)), {}
+        if path == '/api/admin/school-qr' and method == 'POST':
+            return 200, _ok(_school_qr_upload(session, body)), {}
+        if path == '/api/admin/school-qr' and method == 'GET':
+            return 200, _ok(_school_qr_get(session, query)), {}
         if path == '/api/admin/schools' and method == 'GET':
             return 200, _ok({'items': list_schools(session)}), {}
         match = re.fullmatch(r'/api/admin/schools/(\d+)/modules', path)
@@ -1476,3 +1480,35 @@ def dispatch(method: str, path: str, query: dict, headers, raw_body: bytes, requ
 
 
 init_db()
+
+
+def _school_qr_upload(session: dict, body: dict) -> dict:
+    import sys as _sys
+    _sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    try:
+        from qr_upload import upload_school_qr
+    except Exception as exc:
+        raise ValueError('二维码组件不可用：%s' % exc) from exc
+    return upload_school_qr(session, body)
+
+
+def _school_qr_get(session: dict, query: dict) -> dict:
+    import sys as _sys
+    _sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    try:
+        from qr_upload import get_school_qr
+    except Exception as exc:
+        raise ValueError('二维码组件不可用：%s' % exc) from exc
+    return get_school_qr(session, int((query or {}).get('school_id') or 0))
+
+
+def school_qr_public(school_name: str) -> dict:
+    """公开：给院校展示位读二维码。"""
+    try:
+        from qr_upload import school_qr_by_name
+    except Exception:
+        return {'cover_url': '', 'has_qr': False}
+    try:
+        return school_qr_by_name(school_name)
+    except Exception:
+        return {'cover_url': '', 'has_qr': False}

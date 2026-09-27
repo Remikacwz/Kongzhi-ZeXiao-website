@@ -1926,7 +1926,8 @@ function renderDetail(schoolName){
   // 院校QQ群二维码单独组件
   var qqGroupCard = document.getElementById('qqGroupCard');
   if(qqGroupCard) qqGroupCard.style.display = isQrAdEnabled() ? 'block' : 'none';
-  if(hasQR){
+  loadBackendQr(schoolName);
+  if(hasQR || BACKEND_QR[schoolName]){
     document.getElementById('qqGroupContent').innerHTML = `
       <div style="text-align:center;cursor:pointer;" onclick="openQrLightbox('${getQrPath(schoolName)}')">
         <img src="${getQrPath(schoolName)}"
@@ -1943,6 +1944,19 @@ function renderDetail(schoolName){
         <div style="font-size:11px;color:#aaa;margin-top:4px;">该院校QQ群二维码暂未收集到</div>
       </div>`;
   }
+
+  loadBackendQr(schoolName, function(){
+    var u = BACKEND_QR[schoolName]; if(!u) return;
+    var el = document.getElementById('qqGroupContent'); if(!el) return;
+    var card = document.getElementById('qqGroupCard'); if(card) card.style.setProperty('display','block','important');
+    var img = document.createElement('img');
+    img.src = u; img.alt = schoolName + 'QQ群';
+    img.setAttribute('style','width:100%;max-width:260px;aspect-ratio:944 / 1164;object-fit:contain;background:#fff;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.15);display:block;margin:0 auto;cursor:pointer;');
+    img.addEventListener('click', function(){ openQrLightbox(u); });
+    var t1 = document.createElement('div'); t1.setAttribute('style','font-size:12px;color:#555;font-weight:600;margin-top:4px;'); t1.textContent = '📱 院校QQ群';
+    var t2 = document.createElement('div'); t2.setAttribute('style','font-size:10px;color:#999;'); t2.textContent = '扫码加入考研群';
+    el.innerHTML = ''; el.appendChild(img); el.appendChild(t1); el.appendChild(t2);
+  });
 
   // 初始化筛选器
   initDetailFilters(schoolRecs);
@@ -3178,8 +3192,21 @@ var QR_EXTS = {
   "重庆邮电大学": ".png",
   "长安大学": ".png"
 };
+var BACKEND_QR = {};
+function loadBackendQr(name, cb){
+  if(!name) return;
+  if(BACKEND_QR[name]){ if(cb) cb(name); return; }
+  fetch('/api/school-qr?school=' + encodeURIComponent(name))
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if(d && d.data && d.data.cover_url) BACKEND_QR[name] = String(d.data.cover_url);
+      if(cb) cb(name);
+    }).catch(function(){});
+}
+
 function getQrPath(name){
   if(!VALID_QRS.has(name)) return null;
+  if(BACKEND_QR[name]) return BACKEND_QR[name];
   return '专业课选择/images/27考研群/' + name + (QR_EXTS[name] || '.png');
 }
 var posterIndex = 0;

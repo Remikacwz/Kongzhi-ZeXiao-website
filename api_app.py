@@ -66,6 +66,8 @@ async def analytics_click(request: Request):
 async def api_route(path: str, request: Request):
     full_path = '/api/' + path
     params = dict(request.query_params)
+    if full_path == '/api/school-qr':
+        return {'code': 0, 'data': content_admin.school_qr_public(params.get('school', ''))}
     if full_path == '/api/school-content':
         return {'code': 0, 'data': {'items': content_admin.public_modules(params.get('school', ''))}}
     if full_path == '/api/exam-resources':

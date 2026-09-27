@@ -27,8 +27,15 @@ class QrCardError(ValueError):
         self.code = code
         self.message = message
 
+DEFAULT_TEMPLATE = {'canvas': {'width': 944, 'height': 1164, 'background': '#ffffff'}, 'qr': {'x': 89, 'y': 127, 'size': 766, 'version': 10, 'error_correction': 'M', 'border': 0, 'dark': '#000000', 'light': '#ffffff', 'logo_ratio': 0.22, 'logo_pad': 12, 'modules': 57}, 'line1': {'y': 990, 'size': 46, 'bold': True, 'color': '#000000', 'text': '{school}', 'font': 'msyhbd.ttc'}, 'line2': {'y': 1076, 'size': 34, 'bold': False, 'color': '#000000', 'text': '控制考研交流群', 'font': 'msyh.ttc'}}
+
+
 def template():
-    return json.loads(TEMPLATE_PATH.read_text(encoding='utf-8'))
+    try:
+        return json.loads(TEMPLATE_PATH.read_text(encoding='utf-8'))
+    except Exception:
+        return DEFAULT_TEMPLATE   # 部署目录缺少 template.json 时用内置版式
+
 
 def _font(size):
     if size not in _fonts:
