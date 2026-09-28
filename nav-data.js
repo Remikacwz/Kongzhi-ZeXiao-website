@@ -22,6 +22,7 @@ window.NAV_GROUPS = [
     { href: '考研常识科普/index.html', label: '28 考研常识扫盲', icon: 'book' },
     { href: '真题备考区.html', label: '真题备考区', icon: 'clipboard' },
     { href: '真题思维导图/index.html', label: '真题思维导图', icon: 'map' },
+    { href: '真题思维导图/data/index.html', label: '考情数据（考点热度/公式/易错/自测）', icon: 'chart' },
     { href: '复试全攻略/index.html', label: '27 考研复试', icon: 'clipboard' },
       { href: '复试全攻略/面试题库.html', label: '复试面试题库', icon: 'book' },
     { href: '考研常识科普/experience.html', label: '上岸经验贴', icon: 'message' }
