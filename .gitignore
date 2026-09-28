@@ -60,3 +60,5 @@ _sync_*.tgz
 _工作台_bak/
 tools/dev_env.sh
 _工作台_bak_*
+sitemap.xml.bak-*
+_工作台_bak_sitemap_old.xml
