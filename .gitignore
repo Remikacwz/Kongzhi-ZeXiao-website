@@ -59,3 +59,4 @@ uploads/content/*
 _sync_*.tgz
 _工作台_bak/
 tools/dev_env.sh
+_工作台_bak_*

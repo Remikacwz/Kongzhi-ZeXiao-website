@@ -143,6 +143,11 @@ class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
             except ValueError as exc:
                 self._send_json(400, {'code': 1, 'msg': str(exc)})
             return
+        if decoded_path == '/api/school-qr':
+            params = urllib.parse.parse_qs(parsed.query)
+            school = (params.get('school') or [''])[0]
+            self._send_json(200, {'code': 0, 'data': content_admin.school_qr_public(school)})
+            return
         match = re.fullmatch(r'/api/schools/([^/]+)/content-modules', decoded_path)
         if match:
             self._send_json(200, {'code': 0, 'data': {'items': content_admin.public_modules(match.group(1))}})
